@@ -15,27 +15,58 @@ A blazingly fast emoji search CLI for macOS that helps you find emojis using key
 
 ## Installation
 
-### Building from Source
+### Quick Install (Recommended)
+
+The easiest way to install Almoji is using the install script:
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/shaond/almoji.git
 cd almoji
 
-# Build in release mode for maximum performance
-cargo build --release
-
-# The binary will be available at ./target/release/almoji
+# Run the installation script
+./install.sh
 ```
 
-### Installing to System
+The script will:
+- ✓ Check for Rust installation
+- ✓ Build the project in release mode
+- ✓ Run tests
+- ✓ Install the binary to `/usr/local/bin`
+- ✓ Verify the installation
+- ✓ Optionally install the Alfred workflow
+
+**Options:**
+```bash
+./install.sh --prefix ~/.local      # Install to custom directory
+./install.sh --skip-tests           # Skip running tests
+./install.sh --uninstall            # Uninstall Almoji
+./install.sh --help                 # Show help
+```
+
+### Using Make
+
+If you prefer using Make:
 
 ```bash
-# Build and install
+make install              # Build and install to /usr/local/bin
+make install PREFIX=~/.local   # Install to custom directory
+make alfred               # Install Alfred workflow
+make test                 # Run tests
+make uninstall            # Remove installed binary
+```
+
+### Manual Installation
+
+```bash
+# Build in release mode
+cargo build --release
+
+# Install using cargo
 cargo install --path .
 
-# Or copy the binary to your PATH
-cp target/release/almoji /usr/local/bin/
+# Or copy the binary manually
+sudo cp target/release/almoji /usr/local/bin/
 ```
 
 ### Alfred Workflow
