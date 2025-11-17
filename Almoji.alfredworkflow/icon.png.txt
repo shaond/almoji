@@ -1,0 +1,16 @@
+Icon Placeholder
+
+Since we cannot create actual PNG images in this environment, you'll need to add an icon.png file manually.
+The icon should be a 256x256 PNG image representing emojis or the Almoji brand.
+
+You can use an emoji character as the icon by taking a screenshot of a large emoji,
+or create a custom icon using a tool like Sketch, Figma, or online icon generators.
+
+Recommended: Use the 😊 emoji or 🔍 emoji as the icon.
+
+To create an emoji icon on macOS:
+1. Open TextEdit
+2. Type a large emoji (⌘+ to increase size)
+3. Take a screenshot (⌘+Shift+4, then Space, click window)
+4. Resize to 256x256 pixels
+5. Save as icon.png in this directory
