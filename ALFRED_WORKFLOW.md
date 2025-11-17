@@ -16,24 +16,22 @@ The Alfred workflow is located in the `Almoji.alfredworkflow/` directory.
 
 2. **Install the Workflow in Alfred**:
 
-   Option A - Import directly (easiest):
-   ```bash
-   # Open the workflow directory in Finder
-   open Almoji.alfredworkflow
-   ```
-   Then double-click the `info.plist` file or import the folder via Alfred preferences.
+   **Option A - Double-click to install (recommended)**:
+   - Download `Almoji-Workflow.alfredworkflow`
+   - Double-click the file
+   - Alfred will open and prompt you to import the workflow
+   - Click "Import" to add it to Alfred
 
-   Option B - Manual installation:
+   **Option B - Manual installation**:
    ```bash
-   # Copy to Alfred's workflow directory
-   cp -r Almoji.alfredworkflow ~/Library/Application\ Support/Alfred/Alfred.alfredpreferences/workflows/user.workflow.$(uuidgen)
+   # Open the workflow file to install
+   open Almoji-Workflow.alfredworkflow
    ```
 
-3. **Add an Icon (Optional but Recommended)**:
-   The workflow includes an `icon.png.txt` file with instructions. To add a proper icon:
-   - Create or download a 256x256 PNG image
-   - Save it as `icon.png` in the `Almoji.alfredworkflow/` directory
-   - Recommended: Use an emoji screenshot (😊 or 🔍)
+   The workflow includes:
+   - ✅ Complete info.plist configuration
+   - ✅ Custom 256x256 PNG icon (emoji search themed)
+   - ✅ Comprehensive documentation
 
 ## Usage
 
@@ -70,10 +68,12 @@ Leave empty to use default emojis.
 
 ## Files
 
+**Workflow Package**: `Almoji-Workflow.alfredworkflow` (ready to install)
+
+**Source Files** (in `Almoji.alfredworkflow/` directory):
 - `info.plist` - Workflow configuration and script
 - `README.md` - Detailed documentation
-- `icon.png.txt` - Instructions for adding an icon
-- `icon.png` - (You need to add this - see instructions)
+- `icon.png` - Custom 256x256 emoji search icon
 
 ## Customization
 
@@ -110,15 +110,24 @@ The workflow uses:
 
 ## Distribution
 
-To share this workflow with others, create a `.alfredworkflow` package:
+The workflow is distributed as `Almoji-Workflow.alfredworkflow`, which is ready to install.
+
+To rebuild the workflow package:
 
 ```bash
 cd Almoji.alfredworkflow
-zip -r ../Almoji.alfredworkflow.zip .
-mv ../Almoji.alfredworkflow.zip ../Almoji.alfredworkflow
+zip -r ../Almoji-Workflow.alfredworkflow . -x "*.DS_Store"
 ```
 
 Users can then double-click the `.alfredworkflow` file to install.
+
+## Included Icon
+
+The workflow includes a custom 256x256 PNG icon featuring:
+- Gradient purple-to-blue circular background
+- Emoji/smiley face design
+- Magnifying glass overlay (indicating "search")
+- Professional appearance in Alfred's UI
 
 ## Requirements
 
