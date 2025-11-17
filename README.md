@@ -8,6 +8,9 @@ A blazingly fast emoji search CLI for macOS that helps you find emojis using key
 - **No External Dependencies**: Emojis are stored as Unicode characters in the binary itself
 - **System Font Integration**: Emojis render using macOS's native Apple Color Emoji font
 - **Smart Search**: Supports exact matches, prefix matching, and substring matching
+- **Customizable**: Support for skin tone modifiers and gender variants
+- **Multi-word Search**: Search for emojis using multiple keywords
+- **Alfred Integration**: Included Alfred workflow for quick emoji access
 - **500+ Emojis**: Comprehensive database covering smileys, animals, food, activities, travel, objects, and symbols
 
 ## Installation
@@ -35,6 +38,15 @@ cargo install --path .
 cp target/release/almoji /usr/local/bin/
 ```
 
+### Alfred Workflow
+
+An Alfred workflow is included for quick emoji searching directly from Alfred! See [ALFRED_WORKFLOW.md](ALFRED_WORKFLOW.md) for installation and usage instructions.
+
+**Quick start:**
+1. Install Almoji CLI (see above)
+2. Import the workflow from `Almoji.alfredworkflow/`
+3. Type `;` in Alfred followed by your search term
+
 ## Usage
 
 Basic usage:
@@ -61,12 +73,41 @@ almoji --limit 3 sun
 almoji [OPTIONS] <QUERY>
 
 Arguments:
-  <QUERY>  Search query for emojis
+  <QUERY>  Search query for emojis (can be multiple words)
 
 Options:
-  -l, --limit <LIMIT>  Maximum number of results to return [default: 10]
-  -h, --help           Print help
-  -V, --version        Print version
+  -l, --limit <LIMIT>            Maximum number of results to return [default: 10]
+  -g, --gender <GENDER>          Gender variant [possible values: male, female, neutral]
+  -s, --skin-tone <SKIN_TONE>    Skin tone variant [possible values: light, medium-light,
+                                 medium, medium-dark, dark]
+  -h, --help                     Print help
+  -V, --version                  Print version
+```
+
+### Advanced Usage
+
+**Skin Tone Modifiers:**
+```bash
+almoji --skin-tone medium wave
+# Output: 👋🏽 (wave)
+
+almoji -s dark thumbsup
+# Output: 👍🏿 (thumbsup)
+```
+
+**Gender Variants:**
+```bash
+almoji --gender female shrug
+# Output: 🤷‍♀️ (shrug)
+
+almoji -g male facepalm
+# Output: 🤦‍♂️ (facepalm)
+```
+
+**Combining Options:**
+```bash
+almoji --skin-tone medium-dark --gender female --limit 5 person
+# Search with both modifiers and limit results
 ```
 
 ## Examples
