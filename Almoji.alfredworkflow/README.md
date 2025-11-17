@@ -125,14 +125,27 @@ By default, the workflow shows up to 20 results. To change this:
 
 ## Troubleshooting
 
-### "No emojis found" appears for all searches
+### "Almoji not found" error message
 
-**Problem**: Almoji CLI is not found in PATH
+**Problem**: Almoji CLI binary cannot be located
 
 **Solution**:
-1. Verify Almoji is installed: `which almoji`
-2. If not found, install Almoji or add its location to your PATH
-3. Restart Alfred after installing
+1. Verify Almoji is installed: `which almoji` or `ls ~/.cargo/bin/almoji`
+2. Install Almoji if not found: `cargo install --path /path/to/almoji`
+3. The workflow automatically checks these locations:
+   - Any location in your `$PATH`
+   - `~/.cargo/bin/almoji` (default cargo install location)
+   - `/usr/local/bin/almoji`
+4. Restart Alfred after installing
+
+### "No emojis found" appears for all searches
+
+**Problem**: Search query doesn't match any emojis
+
+**Solution**:
+1. Try different search terms (e.g., "happy" instead of "happiness")
+2. Check for typos in your search query
+3. Try broader terms (e.g., "face" instead of specific emotions)
 
 ### Configuration variables not working
 
