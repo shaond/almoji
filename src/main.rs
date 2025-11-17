@@ -44,29 +44,44 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
     let mut map = HashMap::new();
 
     // Cannabis/Marijuana slang
-    map.insert("weed", vec!["🥦", "🌿", "🍃"]);
-    map.insert("marijuana", vec!["🥦", "🌿", "🍃"]);
-    map.insert("cannabis", vec!["🥦", "🌿", "🍃"]);
+    map.insert("weed", vec!["🥦", "🌿", "🍃", "🍁"]);
+    map.insert("marijuana", vec!["🥦", "🌿", "🍃", "🍁"]);
+    map.insert("cannabis", vec!["🥦", "🌿", "🍃", "🍁", "🍀", "🌲", "🌴"]);
     map.insert("pot", vec!["🥦", "🌿"]);
     map.insert("herb", vec!["🌿", "🥦"]);
     map.insert("420", vec!["🥦", "🌿", "🍃"]);
     map.insert("joint", vec!["🌿", "🥦"]);
 
+    // Other drug slang
+    map.insert("cocaine", vec!["❄️", "⛄", "🎱"]);
+    map.insert("drugs", vec!["💊"]);
+    map.insert("psychedelic", vec!["🍄"]);
+    map.insert("dealer", vec!["🔌"]);
+    map.insert("plug", vec!["🔌"]);
+    map.insert("intoxication", vec!["🥴", "🚀"]);
+    map.insert("intoxicated", vec!["🥴"]);
+    map.insert("fentanyl", vec!["🧀", "🐉"]);
+    map.insert("heroin", vec!["🐉"]);
+
     // Adult/Sexual slang
-    map.insert("penis", vec!["🍆"]);
-    map.insert("dick", vec!["🍆"]);
+    map.insert("penis", vec!["🍆", "🍌", "🌭"]);
+    map.insert("dick", vec!["🍆", "🍌"]);
     map.insert("cock", vec!["🍆"]);
     map.insert("butt", vec!["🍑"]);
     map.insert("ass", vec!["🍑"]);
     map.insert("booty", vec!["🍑"]);
     map.insert("sexy", vec!["🍆", "🍑", "💦"]);
     map.insert("sex", vec!["🍆", "🍑"]);
-    map.insert("horny", vec!["🍆", "💦"]);
+    map.insert("sexual", vec!["🍆", "🍑", "🍌", "🌭", "🌮", "🍒", "💦"]);
+    map.insert("horny", vec!["🍆", "💦", "💜"]);
     map.insert("ejaculate", vec!["💦"]);
     map.insert("cum", vec!["💦"]);
-    map.insert("breasts", vec!["🍈", "🍉"]);
-    map.insert("boobs", vec!["🍈", "🍉"]);
+    map.insert("breasts", vec!["🍈", "🍉", "🍒"]);
+    map.insert("boobs", vec!["🍈", "🍉", "🍒"]);
     map.insert("tits", vec!["🍈"]);
+    map.insert("attractive", vec!["🍑"]);
+    map.insert("spicy", vec!["🌶️"]);
+    map.insert("flirty", vec!["👅"]);
 
     // LGBTQIA+ and Pride
     map.insert("gay", vec!["🏳️‍🌈"]);
@@ -82,9 +97,11 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
     map.insert("dead", vec!["💀"]);
     map.insert("dying", vec!["💀"]);
     map.insert("skull", vec!["💀"]);
+    map.insert("hilarious", vec!["💀", "😂"]);
     map.insert("fire", vec!["🔥"]);
     map.insert("lit", vec!["🔥"]);
     map.insert("dope", vec!["🔥"]);
+    map.insert("awesome", vec!["🔥"]);
     map.insert("cap", vec!["🧢"]);
     map.insert("lying", vec!["🧢", "🤥"]);
     map.insert("fake", vec!["🧢"]);
@@ -105,10 +122,12 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
     map.insert("drip", vec!["💧", "💎"]);
     map.insert("ghosted", vec!["👻"]);
     map.insert("ghost", vec!["👻"]);
+    map.insert("abandoned", vec!["👻"]);
     map.insert("shade", vec!["☕", "😎"]);
     map.insert("tea", vec!["☕", "🫖"]);
     map.insert("gossip", vec!["☕", "👀"]);
     map.insert("salty", vec!["🧂"]);
+    map.insert("bitterness", vec!["🧂"]);
     map.insert("savage", vec!["😈", "🔥"]);
     map.insert("lowkey", vec!["🤫"]);
     map.insert("highkey", vec!["📢"]);
@@ -120,6 +139,43 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
     map.insert("stan", vec!["🙌", "❤️"]);
     map.insert("blessed", vec!["🙏", "✨"]);
     map.insert("canceled", vec!["🚫", "❌"]);
+
+    // Additional Gen Z and modern slang
+    map.insert("hilarity", vec!["😂"]);
+    map.insert("agreement", vec!["💯", "🤝"]);
+    map.insert("watching", vec!["👀"]);
+    map.insert("disgusting", vec!["💩"]);
+    map.insert("approval", vec!["👍", "👌"]);
+    map.insert("emotional", vec!["😭"]);
+    map.insert("sarcasm", vec!["🙃", "✨"]);
+    map.insert("vulnerability", vec!["🥺"]);
+    map.insert("shock", vec!["🤯"]);
+    map.insert("detachment", vec!["😶‍🌫️"]);
+    map.insert("emphasis", vec!["✨"]);
+    map.insert("aesthetic", vec!["🎀", "✨"]);
+    map.insert("disapproval", vec!["🍅"]);
+    map.insert("determination", vec!["😤", "💪"]);
+    map.insert("exhaustion", vec!["😩", "😴"]);
+    map.insert("indifference", vec!["🤷"]);
+    map.insert("nervous", vec!["👉👈", "😅"]);
+    map.insert("betrayal", vec!["🐍"]);
+    map.insert("warning", vec!["🚩"]);
+    map.insert("desire", vec!["💳"]);
+    map.insert("excellence", vec!["🐐", "👑"]);
+    map.insert("goat", vec!["🐐"]);
+    map.insert("superior", vec!["👑"]);
+    map.insert("precious", vec!["💎"]);
+    map.insert("intelligent", vec!["🤓"]);
+    map.insert("protection", vec!["🧿"]);
+    map.insert("accuracy", vec!["🎯"]);
+    map.insert("growth", vec!["📈"]);
+    map.insert("strength", vec!["💪"]);
+    map.insert("entertainment", vec!["🍿"]);
+    map.insert("authority", vec!["🍩"]);
+    map.insert("adult", vec!["🌽"]);
+    map.insert("corn", vec!["🌽"]);
+    map.insert("urgency", vec!["⌛"]);
+    map.insert("awkward", vec!["😬"]);
 
     // Country/Location slang
     map.insert("aussie", vec!["🇦🇺"]);
@@ -143,11 +199,35 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
     map.insert("china", vec!["🇨🇳"]);
     map.insert("korea", vec!["🇰🇷"]);
     map.insert("india", vec!["🇮🇳"]);
+    map.insert("singapore", vec!["🇸🇬"]);
     map.insert("mexico", vec!["🇲🇽"]);
     map.insert("brazil", vec!["🇧🇷"]);
     map.insert("russia", vec!["🇷🇺"]);
     map.insert("italy", vec!["🇮🇹"]);
     map.insert("spain", vec!["🇪🇸"]);
+    map.insert("patriotism", vec!["🇬🇧", "🇦🇺", "🇸🇬", "🇮🇳", "🇺🇸"]);
+
+    // British English slang
+    map.insert("socializing", vec!["🍺"]);
+    map.insert("sports", vec!["⚽", "🏏"]);
+    map.insert("tourism", vec!["💂"]);
+
+    // Australian English slang
+    map.insert("wildlife", vec!["🦘", "🦎", "🐊", "🕷️"]);
+    map.insert("relaxation", vec!["🏖️"]);
+    map.insert("confidence", vec!["😎", "💪"]);
+    map.insert("danger", vec!["🕷️"]);
+    map.insert("indulgence", vec!["🍷"]);
+    map.insert("tropical", vec!["🌴"]);
+
+    // Singlish (Singapore English) slang
+    map.insert("culinary", vec!["🍜", "🍛"]);
+    map.insert("confusion", vec!["🦑"]);
+
+    // Indian English slang
+    map.insert("spirituality", vec!["🕉️"]);
+    map.insert("celebration", vec!["💐", "🎆", "🙌"]);
+    map.insert("festival", vec!["🪔", "🎆"]);
 
     // Emotions and reactions
     map.insert("lol", vec!["😂", "🤣"]);
@@ -158,18 +238,22 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
     map.insert("laughing", vec!["😂", "🤣"]);
     map.insert("smh", vec!["🤦", "😔"]);
     map.insert("facepalm", vec!["🤦"]);
+    map.insert("frustration", vec!["🤦"]);
     map.insert("eyeroll", vec!["🙄"]);
+    map.insert("exasperation", vec!["🙄"]);
     map.insert("shrug", vec!["🤷"]);
     map.insert("idk", vec!["🤷", "🤔"]);
     map.insert("thinking", vec!["🤔"]);
+    map.insert("concern", vec!["🤔"]);
     map.insert("hmm", vec!["🤔"]);
     map.insert("wow", vec!["😮", "🤯"]);
     map.insert("omg", vec!["😱", "🤯"]);
     map.insert("yikes", vec!["😬", "😳"]);
     map.insert("oops", vec!["😬", "🤭"]);
     map.insert("awkward", vec!["😬", "😅"]);
-    map.insert("nervous", vec!["😅", "😰"]);
+    map.insert("nervous", vec!["😅", "😰", "👉👈"]);
     map.insert("sweating", vec!["😅", "💦"]);
+    map.insert("embarrassment", vec!["😅"]);
     map.insert("tired", vec!["😴", "😪"]);
     map.insert("exhausted", vec!["😴", "😫"]);
     map.insert("done", vec!["😑", "💀"]);
@@ -191,6 +275,19 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
     map.insert("pray", vec!["🙏"]);
     map.insert("thanks", vec!["🙏", "👍"]);
     map.insert("please", vec!["🙏"]);
+    map.insert("respect", vec!["🙏"]);
+    map.insert("naughty", vec!["😈"]);
+    map.insert("satisfaction", vec!["😋"]);
+
+    // Heart colors and their meanings
+    map.insert("friendship", vec!["🧡", "😊"]);
+    map.insert("platonic", vec!["💛"]);
+    map.insert("acquaintance", vec!["💚"]);
+    map.insert("trust", vec!["💙"]);
+    map.insert("attraction", vec!["💜"]);
+    map.insert("sadness", vec!["🖤", "😭"]);
+    map.insert("comfort", vec!["🤎"]);
+    map.insert("warmth", vec!["🩷"]);
 
     // Money and success
     map.insert("money", vec!["💰", "💵", "💸"]);
@@ -277,6 +374,15 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
     map.insert("ninja", vec!["🥷"]);
     map.insert("superhero", vec!["🦸"]);
     map.insert("hero", vec!["🦸", "🏆"]);
+
+    // Manosphere/incel slang
+    map.insert("ideology", vec!["💊"]);
+    map.insert("awakening", vec!["💥"]);
+    map.insert("community", vec!["🫘"]);
+    map.insert("redpill", vec!["💊"]);
+
+    // Snapchat-specific meanings
+    map.insert("relationship", vec!["😎"]);
 
     map
 });
