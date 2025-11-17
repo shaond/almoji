@@ -47,26 +47,47 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
     map.insert("weed", vec!["🥦", "🌿", "🍃"]);
     map.insert("marijuana", vec!["🥦", "🌿", "🍃"]);
     map.insert("cannabis", vec!["🥦", "🌿", "🍃"]);
-    map.insert("pot", vec!["🥦", "🌿"]);
+    map.insert("pot", vec!["🥦", "🌿", "🍁"]);
     map.insert("herb", vec!["🌿", "🥦"]);
     map.insert("420", vec!["🥦", "🌿", "🍃"]);
     map.insert("joint", vec!["🌿", "🥦"]);
+    map.insert("bud", vec!["🌿"]);
+    map.insert("hash", vec!["🍀"]);
+    map.insert("chronic", vec!["🌲"]);
+    map.insert("blunt", vec!["🌴"]);
+    map.insert("nug", vec!["🥦"]);
 
     // Adult/Sexual slang
     map.insert("penis", vec!["🍆"]);
-    map.insert("dick", vec!["🍆"]);
+    map.insert("dick", vec!["🍆", "🍌"]);
     map.insert("cock", vec!["🍆"]);
+    map.insert("dong", vec!["🌭"]);
     map.insert("butt", vec!["🍑"]);
     map.insert("ass", vec!["🍑"]);
     map.insert("booty", vec!["🍑"]);
+    map.insert("pussy", vec!["🌮"]);
     map.insert("sexy", vec!["🍆", "🍑", "💦"]);
     map.insert("sex", vec!["🍆", "🍑"]);
-    map.insert("horny", vec!["🍆", "💦"]);
+    map.insert("horny", vec!["🍆", "💦", "👅"]);
     map.insert("ejaculate", vec!["💦"]);
     map.insert("cum", vec!["💦"]);
+    map.insert("wet", vec!["💦"]);
     map.insert("breasts", vec!["🍈", "🍉"]);
     map.insert("boobs", vec!["🍈", "🍉"]);
-    map.insert("tits", vec!["🍈"]);
+    map.insert("tits", vec!["🍈", "🍒"]);
+    map.insert("spicy", vec!["🌶️"]);
+
+    // Other drug slang
+    map.insert("coke", vec!["❄️"]);
+    map.insert("powder", vec!["⛄"]);
+    map.insert("eight", vec!["🎱"]);
+    map.insert("molly", vec!["💊"]);
+    map.insert("redpill", vec!["💊"]);
+    map.insert("shroom", vec!["🍄"]);
+    map.insert("plug", vec!["🔌"]);
+    map.insert("high", vec!["🚀"]);
+    map.insert("fent", vec!["🧀"]);
+    map.insert("h", vec!["🐉"]);
 
     // LGBTQIA+ and Pride
     map.insert("gay", vec!["🏳️‍🌈"]);
@@ -87,39 +108,74 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
     map.insert("dope", vec!["🔥"]);
     map.insert("cap", vec!["🧢"]);
     map.insert("lying", vec!["🧢", "🤥"]);
-    map.insert("fake", vec!["🧢"]);
+    map.insert("fake", vec!["🧢", "🐍"]);
     map.insert("nocap", vec!["🚫🧢"]);
     map.insert("clown", vec!["🤡"]);
+    map.insert("clowning", vec!["🤡"]);
     map.insert("foolish", vec!["🤡"]);
     map.insert("stupid", vec!["🤡"]);
     map.insert("cringe", vec!["😬"]);
     map.insert("oof", vec!["😬", "😅"]);
     map.insert("yeet", vec!["💨", "🚀"]);
     map.insert("vibes", vec!["✨", "🌊"]);
-    map.insert("slay", vec!["💅", "👑"]);
-    map.insert("sus", vec!["🤨", "🔍"]);
+    map.insert("vibe", vec!["💚", "✨"]);
+    map.insert("slay", vec!["💅", "👑", "😭", "🎯"]);
+    map.insert("sus", vec!["🤨", "🔍", "💩"]);
     map.insert("suspicious", vec!["🤨", "🔍"]);
     map.insert("shook", vec!["😱", "🤯"]);
     map.insert("mood", vec!["💯"]);
-    map.insert("flex", vec!["💪", "💎"]);
+    map.insert("bet", vec!["💯"]);
+    map.insert("flex", vec!["💪", "💎", "🏆"]);
     map.insert("drip", vec!["💧", "💎"]);
     map.insert("ghosted", vec!["👻"]);
     map.insert("ghost", vec!["👻"]);
     map.insert("shade", vec!["☕", "😎"]);
     map.insert("tea", vec!["☕", "🫖"]);
     map.insert("gossip", vec!["☕", "👀"]);
-    map.insert("salty", vec!["🧂"]);
+    map.insert("lurking", vec!["👀"]);
+    map.insert("salty", vec!["🧂", "🧚‍♀️✨"]);
     map.insert("savage", vec!["😈", "🔥"]);
     map.insert("lowkey", vec!["🤫"]);
     map.insert("highkey", vec!["📢"]);
-    map.insert("fam", vec!["👪", "🤝"]);
+    map.insert("fam", vec!["👪", "🤝", "💙"]);
     map.insert("bruh", vec!["🤦", "😑"]);
     map.insert("bro", vec!["🤜🤛", "👊"]);
-    map.insert("bestie", vec!["👯", "💕"]);
+    map.insert("bros", vec!["😎"]);
+    map.insert("bestie", vec!["👯", "💕", "🧡", "😊"]);
     map.insert("simp", vec!["🤡", "💕"]);
     map.insert("stan", vec!["🙌", "❤️"]);
-    map.insert("blessed", vec!["🙏", "✨"]);
+    map.insert("stans", vec!["💳"]);
+    map.insert("blessed", vec!["🙏", "✨", "🧿"]);
     map.insert("canceled", vec!["🚫", "❌"]);
+    map.insert("ew", vec!["👍"]);
+    map.insert("bae", vec!["❤️"]);
+    map.insert("homie", vec!["💛"]);
+    map.insert("moody", vec!["🖤"]);
+    map.insert("cozy", vec!["🤎"]);
+    map.insert("thicc", vec!["🍑"]);
+    map.insert("freaky", vec!["😈"]);
+    map.insert("wasted", vec!["🥴"]);
+    map.insert("toxic", vec!["🚩"]);
+    map.insert("shy", vec!["👉👈"]);
+    map.insert("goat", vec!["🐐"]);
+    map.insert("gem", vec!["💎"]);
+    map.insert("nerd", vec!["🤓"]);
+    map.insert("stonks", vec!["📈"]);
+    map.insert("shred", vec!["💪"]);
+    map.insert("drama", vec!["🍿"]);
+    map.insert("feds", vec!["🍩"]);
+    map.insert("nsfw", vec!["🌽"]);
+    map.insert("expire", vec!["⌛"]);
+    map.insert("boom", vec!["💥"]);
+    map.insert("incel", vec!["🫘"]);
+    map.insert("sarcasm", vec!["🙃"]);
+    map.insert("uwu", vec!["🥺"]);
+    map.insert("zoned", vec!["😶‍🌫️"]);
+    map.insert("word", vec!["🤝"]);
+    map.insert("girly", vec!["🎀"]);
+    map.insert("boo", vec!["🍅"]);
+    map.insert("hustle", vec!["😤"]);
+    map.insert("idc", vec!["🤷"]);
 
     // Country/Location slang
     map.insert("aussie", vec!["🇦🇺"]);
@@ -149,6 +205,43 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
     map.insert("italy", vec!["🇮🇹"]);
     map.insert("spain", vec!["🇪🇸"]);
 
+    // British English slang
+    map.insert("innit", vec!["🇬🇧"]);
+    map.insert("pint", vec!["🍺"]);
+    map.insert("football", vec!["⚽"]);
+    map.insert("ace", vec!["👌"]);
+    map.insert("bollocks", vec!["🤦"]);
+    map.insert("guarding", vec!["💂"]);
+
+    // Australian English slang
+    map.insert("roo", vec!["🦘"]);
+    map.insert("arvo", vec!["🏖️"]);
+    map.insert("ripper", vec!["😎"]);
+    map.insert("outback", vec!["🦎"]);
+    map.insert("huntsman", vec!["🕷️"]);
+    map.insert("goon", vec!["🍷"]);
+    map.insert("croc", vec!["🐊"]);
+    map.insert("tropical", vec!["🌴"]);
+
+    // Singlish slang
+    map.insert("lah", vec!["🇸🇬"]);
+    map.insert("makan", vec!["🍜"]);
+    map.insert("sotong", vec!["🦑"]);
+    map.insert("paiseh", vec!["😅"]);
+    map.insert("shiok", vec!["💪", "😋"]);
+    map.insert("alamak", vec!["🤔"]);
+    map.insert("wahlau", vec!["🙄"]);
+
+    // Indian English slang
+    map.insert("desi", vec!["🇮🇳"]);
+    map.insert("namaste", vec!["🙏"]);
+    map.insert("curry", vec!["🍛"]);
+    map.insert("om", vec!["🕉️"]);
+    map.insert("puja", vec!["💐"]);
+    map.insert("diwali", vec!["🪔", "🎆"]);
+    map.insert("cricket", vec!["🏏"]);
+    map.insert("shabash", vec!["🙌"]);
+
     // Emotions and reactions
     map.insert("lol", vec!["😂", "🤣"]);
     map.insert("lmao", vec!["😂", "🤣"]);
@@ -170,7 +263,7 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
     map.insert("awkward", vec!["😬", "😅"]);
     map.insert("nervous", vec!["😅", "😰"]);
     map.insert("sweating", vec!["😅", "💦"]);
-    map.insert("tired", vec!["😴", "😪"]);
+    map.insert("tired", vec!["😴", "😪", "😩"]);
     map.insert("exhausted", vec!["😴", "😫"]);
     map.insert("done", vec!["😑", "💀"]);
     map.insert("upset", vec!["😠", "😡"]);
@@ -178,7 +271,7 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
     map.insert("mad", vec!["😡", "😠"]);
     map.insert("love", vec!["❤️", "💕", "😍"]);
     map.insert("heart", vec!["❤️", "💕", "💖"]);
-    map.insert("cute", vec!["🥰", "😊"]);
+    map.insert("cute", vec!["🥰", "😊", "🩷"]);
     map.insert("kiss", vec!["😘", "💋"]);
     map.insert("hug", vec!["🤗", "🫂"]);
     map.insert("cool", vec!["😎", "🆒"]);
@@ -213,7 +306,7 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
 
     // Food slang (beyond existing)
     map.insert("snack", vec!["😋", "🍪"]);
-    map.insert("thirsty", vec!["💦", "🥵"]);
+    map.insert("thirsty", vec!["💦", "🥵", "💜"]);
     map.insert("sausage", vec!["🌭", "🍆"]);
     map.insert("taco", vec!["🌮", "🍑"]);
     map.insert("cherry", vec!["🍒"]);
