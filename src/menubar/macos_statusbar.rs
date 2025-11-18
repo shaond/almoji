@@ -36,7 +36,7 @@ impl MacOSStatusBar {
 
             // Create the menu
             let menu = NSMenu::new(nil);
-            menu.setAutoenablesItems(0); // Don't auto-enable/disable
+            menu.setAutoenablesItems(false); // Don't auto-enable/disable
 
             // Search menu item
             let search_title = NSString::alloc(nil).init_str("Search Emoji");
