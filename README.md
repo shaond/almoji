@@ -24,18 +24,25 @@ A blazingly fast emoji search tool for macOS - available as both a CLI and menub
 
 ## Installation
 
-### Menubar App (Recommended for macOS)
+### Quick Install (macOS - Recommended)
+
+On macOS, the install script automatically installs both the CLI and menubar app:
 
 ```bash
 # Clone the repository
 git clone https://github.com/shaond/almoji.git
 cd almoji
 
-# Build the menubar app
-cargo build --release --bin almoji-menubar
+# Install both CLI and menubar app to ~/.cargo/bin
+./install.sh
 
-# Run the menubar app
-./target/release/almoji-menubar
+# OR install system-wide to /usr/local/bin
+./install.sh --system
+```
+
+After installation, run the menubar app:
+```bash
+almoji-menubar
 ```
 
 The menubar app will appear in your macOS menubar with a 😊 icon. Click it to:
@@ -44,6 +51,8 @@ The menubar app will appear in your macOS menubar with a 😊 icon. Click it to:
 - **Quit**: Exit the app
 
 You can also trigger the search window anytime using the global hotkey (default: Cmd+Shift+E).
+
+**Tip:** Add `almoji-menubar` to your Login Items in System Settings to start it automatically on login.
 
 ### CLI Installation
 
