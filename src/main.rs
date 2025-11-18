@@ -486,23 +486,35 @@ fn search_emojis(query: &str, limit: usize) -> Vec<(String, &'static emojis::Emo
                 break;
             }
 
+            let key = emoji_str.to_string();
+            if seen.contains_key(&key) {
+                continue;
+            }
+
             // Try to find the emoji in the database
             if let Some(emoji_obj) = emojis::get(emoji_str) {
-                let key = emoji_obj.as_str().to_string();
-                if !seen.contains_key(&key) {
-                    results.push((query_lower.clone(), emoji_obj));
-                    seen.insert(key, true);
-                }
+                results.push((query_lower.clone(), emoji_obj));
+                seen.insert(key, true);
             } else {
                 // For compound emojis not in the database, try to find by iterating
+                let mut found = false;
                 for emoji in emojis::iter() {
                     if emoji.as_str() == *emoji_str {
-                        let key = emoji.as_str().to_string();
-                        if !seen.contains_key(&key) {
-                            results.push((query_lower.clone(), emoji));
-                            seen.insert(key, true);
-                            break;
-                        }
+                        results.push((query_lower.clone(), emoji));
+                        seen.insert(key.clone(), true);
+                        found = true;
+                        break;
+                    }
+                }
+
+                // If not found in database, it might be a group of emojis (e.g., "💗💜💙")
+                // In this case, we'll treat it as a raw emoji string
+                if !found {
+                    // Use a dummy emoji object, but store the actual emoji string in the result
+                    // We'll use a marker in the keyword to indicate this is a raw emoji string
+                    if let Some(dummy_emoji) = emojis::iter().next() {
+                        results.push((format!("__raw__:{}", emoji_str), dummy_emoji));
+                        seen.insert(key, true);
                     }
                 }
             }
@@ -630,8 +642,18 @@ fn apply_skin_tone(emoji: &emojis::Emoji, skin_tone: &SkinTone) -> String {
             SkinTone::Dark => "\u{1F3FF}",        // 🏿
         };
 
-        // Append skin tone modifier to the emoji
-        return format!("{}{}", base, modifier);
+        // For compound emojis with ZWJ sequences, we need to insert the skin tone
+        // modifier after the first emoji character, not at the end
+        let chars: Vec<char> = base.chars().collect();
+        if chars.len() > 1 {
+            // Find the first emoji character and insert skin tone after it
+            let first_char = chars[0];
+            let rest: String = chars[1..].iter().collect();
+            return format!("{}{}{}", first_char, modifier, rest);
+        } else {
+            // Simple emoji, just append
+            return format!("{}{}", base, modifier);
+        }
     }
 
     base.to_string()
@@ -671,19 +693,26 @@ fn main() {
     }
 
     for (keyword, emoji) in results {
-        let mut modified_emoji = emoji.as_str().to_string();
+        // Check if this is a raw emoji group (e.g., "💗💜💙")
+        if keyword.starts_with("__raw__:") {
+            // Extract the raw emoji string and print it as-is
+            let raw_emoji = &keyword[8..]; // Skip "__raw__:" prefix
+            println!("{} ({})", raw_emoji, query_normalized);
+        } else {
+            let mut modified_emoji = emoji.as_str().to_string();
 
-        // Apply skin tone modifier if specified and supported
-        if let Some(ref skin_tone) = args.skin_tone {
-            modified_emoji = apply_skin_tone(emoji, skin_tone);
+            // Apply skin tone modifier if specified and supported
+            if let Some(ref skin_tone) = args.skin_tone {
+                modified_emoji = apply_skin_tone(emoji, skin_tone);
+            }
+
+            // Apply gender modifier if specified
+            if let Some(ref gender) = args.gender {
+                modified_emoji = apply_gender(&modified_emoji, gender);
+            }
+
+            println!("{} ({})", modified_emoji, keyword);
         }
-
-        // Apply gender modifier if specified
-        if let Some(ref gender) = args.gender {
-            modified_emoji = apply_gender(&modified_emoji, gender);
-        }
-
-        println!("{} ({})", modified_emoji, keyword);
     }
 }
 
