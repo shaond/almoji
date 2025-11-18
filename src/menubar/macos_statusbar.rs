@@ -1,13 +1,11 @@
 #[cfg(target_os = "macos")]
 use objc2::rc::Retained;
 #[cfg(target_os = "macos")]
-use objc2::runtime::AnyObject;
+use objc2::MainThreadMarker;
 #[cfg(target_os = "macos")]
-use objc2::{msg_send_id, ClassType};
+use objc2_app_kit::{NSMenu, NSMenuItem, NSStatusBar, NSStatusItem};
 #[cfg(target_os = "macos")]
-use objc2_app_kit::{NSButton, NSMenu, NSMenuItem, NSStatusBar, NSStatusItem};
-#[cfg(target_os = "macos")]
-use objc2_foundation::{ns_string, NSString};
+use objc2_foundation::ns_string;
 #[cfg(target_os = "macos")]
 use std::sync::mpsc;
 
@@ -25,29 +23,32 @@ pub struct MacOSStatusBar {
 
 #[cfg(target_os = "macos")]
 impl MacOSStatusBar {
-    pub fn new(action_sender: mpsc::Sender<MenubarAction>) -> Self {
+    pub fn new(_action_sender: mpsc::Sender<MenubarAction>) -> Self {
         unsafe {
+            // Get the main thread marker for AppKit APIs
+            let mtm = MainThreadMarker::new().expect("Must be called on the main thread");
+
             // Get the system status bar
             let status_bar = NSStatusBar::systemStatusBar();
             let status_item = status_bar.statusItemWithLength(-1.0);
 
             // Create the menu
-            let menu = NSMenu::new();
+            let menu = NSMenu::new(mtm);
             menu.setAutoenablesItems(false);
 
             // Search menu item
-            let search_item = NSMenuItem::new();
+            let search_item = NSMenuItem::new(mtm);
             search_item.setTitle(ns_string!("Search Emoji"));
 
             // Settings menu item
-            let settings_item = NSMenuItem::new();
+            let settings_item = NSMenuItem::new(mtm);
             settings_item.setTitle(ns_string!("Settings..."));
 
             // Separator
-            let separator = NSMenuItem::separatorItem();
+            let separator = NSMenuItem::separatorItem(mtm);
 
             // Quit menu item
-            let quit_item = NSMenuItem::new();
+            let quit_item = NSMenuItem::new(mtm);
             quit_item.setTitle(ns_string!("Quit"));
             quit_item.setKeyEquivalent(ns_string!("q"));
 
@@ -61,6 +62,7 @@ impl MacOSStatusBar {
             status_item.setMenu(Some(&menu));
 
             // Set the icon/title on the button
+            // In objc2-app-kit 0.2, we access the button through the status item
             if let Some(button) = status_item.button() {
                 button.setTitle(ns_string!("😊"));
             }
