@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.almoji.workflow</string>
+	<key>category</key>
+	<string>Productivity</string>
+	<key>connections</key>
+	<dict>
+		<key>A1B2C3D4-E5F6-4A5B-8C9D-0E1F2A3B4C5D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B2C3D4E5-F6A7-4B5C-9D0E-1F2A3B4C5D6E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Almoji</string>
+	<key>description</key>
+	<string>Fast emoji search using Almoji CLI</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Almoji - Emoji Search</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>;</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Searching for emojis...</string>
+				<key>script</key>
+				<string>#!/bin/bash
+
+# Function to output error JSON
+error_json() {
+    local title="$1"
+    local subtitle="$2"
+    echo "{\"items\": [{\"title\": \"$title\", \"subtitle\": \"$subtitle\", \"valid\": false}]}"
+}
+
+# Find almoji binary
+almoji_bin=""
+if command -v almoji &amp;&gt;/dev/null; then
+    almoji_bin="almoji"
+elif [ -x "$HOME/.local/bin/almoji" ]; then
+    almoji_bin="$HOME/.local/bin/almoji"
+elif [ -x "$HOME/.cargo/bin/almoji" ]; then
+    almoji_bin="$HOME/.cargo/bin/almoji"
+elif [ -x "/usr/local/bin/almoji" ]; then
+    almoji_bin="/usr/local/bin/almoji"
+else
+    error_json "Almoji not found" "Install with: cargo install --path /path/to/almoji"
+    exit 0
+fi
+
+# Get the query from Alfred
+query="$1"
+
+# Get configuration variables (with defaults)
+skin_tone="${skin_tone:-}"
+gender="${gender:-}"
+
+# Build the almoji command arguments
+args="--limit 20"
+
+# Add skin tone if set
+if [ -n "$skin_tone" ]; then
+    args="$args --skin-tone $skin_tone"
+fi
+
+# Add gender if set
+if [ -n "$gender" ]; then
+    args="$args --gender $gender"
+fi
+
+# Add query
+if [ -n "$query" ]; then
+    args="$args $query"
+fi
+
+# Execute almoji and capture both stdout and stderr
+temp_err=$(mktemp)
+emoji_results=$("$almoji_bin" $args 2&gt;"$temp_err")
+exit_code=$?
+error_output=$(cat "$temp_err")
+rm -f "$temp_err"
+
+# Check if command failed
+if [ $exit_code -ne 0 ]; then
+    if [ -n "$error_output" ]; then
+        error_json "Almoji error" "$error_output"
+    else
+        error_json "Almoji failed" "Exit code: $exit_code"
+    fi
+    exit 0
+fi
+
+# Check if we got results
+if [ -z "$emoji_results" ]; then
+    error_json "No emojis found" "Try a different search term"
+    exit 0
+fi
+
+# Start building JSON output
+echo -n '{"items": ['
+
+first=true
+# Store regex in variable to avoid bash parsing issues
+regex='^(.+)[[:space:]]\(([^)]+)\)$'
+
+while IFS= read -r line; do
+    # Parse the emoji and keyword from output like "🔥 (fire)"
+    if [[ $line =~ $regex ]]; then
+        emoji="${BASH_REMATCH[1]}"
+        keyword="${BASH_REMATCH[2]}"
+
+        # Add comma separator for all but first item
+        if [ "$first" = true ]; then
+            first=false
+        else
+            echo -n ','
+        fi
+
+        # Build JSON item
+        cat &lt;&lt;EOF
+{
+    "uid": "$keyword",
+    "title": "$emoji",
+    "subtitle": "$keyword",
+    "arg": "$emoji",
+    "text": {
+        "copy": "$emoji",
+        "largetype": "$emoji"
+    },
+    "valid": true
+}
+EOF
+    fi
+done &lt;&lt;&lt; "$emoji_results"
+
+echo -n ']}'</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Search for emojis by keyword</string>
+				<key>title</key>
+				<string>Almoji Search</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>A1B2C3D4-E5F6-4A5B-8C9D-0E1F2A3B4C5D</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>B2C3D4E5-F6A7-4B5C-9D0E-1F2A3B4C5D6E</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Almoji Alfred Workflow
+
+Search for emojis quickly using the Almoji CLI.
+
+Usage:
+- Type '; &lt;search term&gt;' to search for emojis
+- Press Enter to copy the emoji to clipboard
+
+Configuration:
+- skin_tone: Set default skin tone (light, medium-light, medium, medium-dark, dark)
+- gender: Set default gender variant (male, female, neutral)
+
+Installation:
+1. Install almoji: cargo install --path /path/to/almoji
+2. Import this workflow into Alfred
+3. Type '; fire' to search for fire emojis
+
+The workflow will automatically find almoji if it's in:
+- Your PATH
+- ~/.cargo/bin/almoji
+- /usr/local/bin/almoji</string>
+	<key>uidata</key>
+	<dict>
+		<key>A1B2C3D4-E5F6-4A5B-8C9D-0E1F2A3B4C5D</key>
+		<dict>
+			<key>xpos</key>
+			<integer>120</integer>
+			<key>ypos</key>
+			<integer>180</integer>
+		</dict>
+		<key>B2C3D4E5-F6A7-4B5C-9D0E-1F2A3B4C5D6E</key>
+		<dict>
+			<key>xpos</key>
+			<integer>420</integer>
+			<key>ypos</key>
+			<integer>180</integer>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string>light, medium-light, medium, medium-dark, dark</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Default skin tone for emojis that support it</string>
+			<key>label</key>
+			<string>Skin Tone</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>skin_tone</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string>male, female, neutral</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Default gender variant for emojis that support it</string>
+			<key>label</key>
+			<string>Gender</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>gender</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string>1.1.0</string>
+	<key>webaddress</key>
+	<string>https://github.com/shaond/almoji</string>
+</dict>
+</plist>
