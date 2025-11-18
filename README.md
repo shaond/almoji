@@ -1,21 +1,51 @@
 # Almoji 🎉
 
-A blazingly fast emoji search CLI for macOS that helps you find emojis using keywords.
+A blazingly fast emoji search tool for macOS - available as both a CLI and menubar application!
 
 ## Features
 
-- **Extremely Fast**: Uses compile-time perfect hash maps (PHF) for O(1) emoji lookups
+### CLI Features
+- **Extremely Fast**: Uses compile-time perfect hash maps for O(1) emoji lookups
 - **No External Dependencies**: Emojis are stored as Unicode characters in the binary itself
 - **System Font Integration**: Emojis render using macOS's native Apple Color Emoji font
 - **Smart Search**: Supports exact matches, prefix matching, and substring matching
 - **Customizable**: Support for skin tone modifiers and gender variants
 - **Multi-word Search**: Search for emojis using multiple keywords
 - **Alfred Integration**: Included Alfred workflow for quick emoji access
-- **500+ Emojis**: Comprehensive database covering smileys, animals, food, activities, travel, objects, and symbols
+
+### Menubar App Features (NEW!)
+- **macOS Menubar Integration**: Lives in your menubar for instant access
+- **Global Hotkey**: Trigger emoji search from anywhere with a customizable hotkey (default: Cmd+Shift+E)
+- **Beautiful GUI**: Clean, keyboard-navigable search interface built with egui
+- **Auto-copy**: Selected emojis are automatically copied to clipboard
+- **Settings Panel**: Configure your hotkey preferences
+- **Pure Rust**: No Swift, Objective-C, or JavaScript - 100% Rust implementation
+- **500+ Emojis & Slang**: Comprehensive database including Gen Z slang, tech terms, and cultural references
 
 ## Installation
 
-### Quick Install
+### Menubar App (Recommended for macOS)
+
+```bash
+# Clone the repository
+git clone https://github.com/shaond/almoji.git
+cd almoji
+
+# Build the menubar app
+cargo build --release --bin almoji-menubar
+
+# Run the menubar app
+./target/release/almoji-menubar
+```
+
+The menubar app will appear in your macOS menubar with a 😊 icon. Click it to:
+- **Search Emoji**: Open the emoji search window
+- **Settings**: Configure your global hotkey
+- **Quit**: Exit the app
+
+You can also trigger the search window anytime using the global hotkey (default: Cmd+Shift+E).
+
+### CLI Installation
 
 ```bash
 # Clone the repository
@@ -29,14 +59,14 @@ cd almoji
 ./install.sh --system
 ```
 
-### Manual Installation
+### Manual CLI Installation
 
 ```bash
 # Install to user directory
-cargo install --path .
+cargo install --path . --bin almoji
 
 # OR install system-wide
-cargo install --path . --root /usr/local
+cargo install --path . --bin almoji --root /usr/local
 ```
 
 ### Alfred Workflow
@@ -51,6 +81,35 @@ An Alfred workflow is included for quick emoji searching directly from Alfred! S
 The workflow includes a custom icon and supports skin tone/gender configuration.
 
 ## Usage
+
+### Menubar App Usage
+
+**Quick Start:**
+1. Launch `almoji-menubar`
+2. The 😊 icon will appear in your macOS menubar
+3. Press Cmd+Shift+E (or your custom hotkey) to open the search window
+4. Type to search for emojis
+5. Use arrow keys to navigate results
+6. Press Enter to copy the selected emoji to clipboard
+7. The emoji is now ready to paste anywhere!
+
+**Keyboard Shortcuts:**
+- **Cmd+Shift+E** (default): Open emoji search window
+- **Arrow Keys**: Navigate search results
+- **Enter**: Select and copy emoji
+- **Escape**: Close search window
+
+**Customizing the Hotkey:**
+1. Click the menubar icon
+2. Select "Settings..."
+3. Choose your preferred modifiers (Ctrl, Alt, Shift, Cmd)
+4. Select your preferred key
+5. Click "Save"
+
+**Settings Location:**
+Settings are stored in `~/.config/almoji/settings.json`
+
+### CLI Usage
 
 Basic usage:
 
@@ -194,11 +253,23 @@ cargo test
 
 ## Technical Details
 
+### CLI
 - **Language**: Rust
 - **Key Dependencies**:
   - `clap`: Command-line argument parsing
-  - `phf`: Perfect hash function for compile-time hash maps
+  - `emojis`: Unicode emoji database
+  - `once_cell`: Lazy static initialization
 - **Platform**: Optimized for macOS but works on any system with Unicode emoji support
+
+### Menubar App
+- **Language**: 100% Rust
+- **Key Dependencies**:
+  - `eframe` / `egui`: Immediate mode GUI framework
+  - `global-hotkey`: Cross-platform global hotkey registration
+  - `arboard`: Clipboard access
+  - `cocoa` / `objc`: macOS native menubar integration (via Rust bindings)
+  - `serde` / `serde_json`: Settings persistence
+- **Platform**: macOS only (uses native NSStatusBar APIs)
 
 ## License
 
@@ -206,13 +277,32 @@ This project is licensed under the MIT License.
 
 ## Contributing
 
-Contributions are welcome! To add more emojis:
+Contributions are welcome!
 
-1. Edit `src/main.rs`
-2. Add new keyword → emoji mappings to the `EMOJI_MAP`
+### To add more emojis or slang terms:
+
+1. Edit `src/emoji_search.rs`
+2. Add new keyword → emoji mappings to the `SLANG_MAP`
 3. Ensure no duplicate keys
 4. Run `cargo test` to verify
 5. Submit a pull request
+
+### Project Structure
+
+```
+almoji/
+├── src/
+│   ├── main.rs              # CLI entry point
+│   ├── menubar_main.rs      # Menubar app entry point
+│   ├── emoji_search.rs      # Shared emoji search logic
+│   └── menubar/             # Menubar app modules
+│       ├── mod.rs           # Module exports
+│       ├── gui.rs           # Search & settings UI
+│       ├── settings.rs      # Settings management
+│       └── macos_statusbar.rs # macOS menubar integration
+├── Cargo.toml               # Dependencies and build config
+└── README.md                # This file
+```
 
 ## Acknowledgments
 
