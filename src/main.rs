@@ -336,6 +336,8 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
     map.insert("usa", vec!["🇺🇸"]);
     map.insert("america", vec!["🇺🇸"]);
     map.insert("murica", vec!["🇺🇸"]);
+    map.insert("yank", vec!["🇺🇸"]);
+    map.insert("yankee", vec!["🇺🇸"]);
     map.insert("uk", vec!["🇬🇧"]);
     map.insert("britain", vec!["🇬🇧"]);
     map.insert("brit", vec!["🇬🇧"]);
@@ -364,6 +366,15 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
     map.insert("ace", vec!["👌"]);
     map.insert("bollocks", vec!["🤦"]);
     map.insert("guarding", vec!["💂"]);
+    map.insert("mate", vec!["🤝", "👥"]);
+    map.insert("mates", vec!["👥", "🤝"]);
+    map.insert("cheers", vec!["🍻", "🥂"]);
+    map.insert("bloke", vec!["👨", "🧔"]);
+    map.insert("cheeky", vec!["😏", "😜"]);
+    map.insert("knackered", vec!["😴", "😩"]);
+    map.insert("gutted", vec!["😞", "😔"]);
+    map.insert("brilliant", vec!["✨", "🌟"]);
+    map.insert("lovely", vec!["🥰", "💕"]);
 
     // Australian English slang
     map.insert("roo", vec!["🦘"]);
@@ -374,6 +385,20 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
     map.insert("goon", vec!["🍷"]);
     map.insert("croc", vec!["🐊"]);
     map.insert("tropical", vec!["🌴"]);
+
+    // Canadian English slang
+    map.insert("eh", vec!["🇨🇦", "🤔"]);
+    map.insert("toque", vec!["🧢", "🇨🇦"]);
+    map.insert("loonie", vec!["🪙", "🇨🇦"]);
+    map.insert("double-double", vec!["☕", "🇨🇦"]);
+    map.insert("doubledouble", vec!["☕"]);
+
+    // American English slang
+    map.insert("dude", vec!["🤙", "😎"]);
+    map.insert("awesome", vec!["🤩", "🔥"]);
+    map.insert("trash", vec!["🗑️", "💩"]);
+    map.insert("garbage", vec!["🗑️", "🚮"]);
+    map.insert("jerk", vec!["😠", "🤬"]);
 
     // Singlish slang
     map.insert("lah", vec!["🇸🇬"]);
@@ -436,6 +461,16 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
     map.insert("upset", vec!["😠", "😡"]);
     map.insert("angry", vec!["😡", "🤬"]);
     map.insert("mad", vec!["😡", "😠"]);
+    map.insert("gross", vec!["🤮", "🤢"]);
+    map.insert("yuk", vec!["🤮", "🤢"]);
+    map.insert("yuck", vec!["🤮", "🤢"]);
+    map.insert("barf", vec!["🤮"]);
+    map.insert("puke", vec!["🤮"]);
+    map.insert("vomit", vec!["🤮"]);
+    map.insert("sick", vec!["🤢", "🤮", "🤒"]);
+    map.insert("nauseous", vec!["🤢"]);
+    map.insert("nauseated", vec!["🤢", "🤮"]);
+    map.insert("disgusting", vec!["🤮", "🤢"]);
     map.insert("love", vec!["❤️", "💕", "😍"]);
     map.insert("heart", vec!["❤️", "💕", "💖"]);
     map.insert("cute", vec!["🥰", "😊", "🩷"]);
@@ -489,6 +524,8 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
     map.insert("hungry", vec!["🍔", "😋"]);
     map.insert("workout", vec!["💪", "🏋️"]);
     map.insert("gym", vec!["💪", "🏋️"]);
+    map.insert("save", vec!["💾", "💿"]);
+    map.insert("saved", vec!["💾", "✅"]);
     map.insert("run", vec!["🏃", "💨"]);
     map.insert("walk", vec!["🚶", "👣"]);
     map.insert("drive", vec!["🚗", "🚙"]);
@@ -519,6 +556,26 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
     map.insert("gaming", vec!["🎮", "🕹️"]);
     map.insert("music", vec!["🎵", "🎶"]);
     map.insert("song", vec!["🎵", "🎤"]);
+
+    // Internet and gaming slang
+    map.insert("spam", vec!["📧", "🚫"]);
+    map.insert("hack", vec!["💻", "🔓"]);
+    map.insert("hacker", vec!["👨‍💻", "🔓"]);
+    map.insert("glitch", vec!["⚡", "🐛"]);
+    map.insert("lag", vec!["🐌", "⏳"]);
+    map.insert("afk", vec!["🚶", "⌨️"]);
+    map.insert("brb", vec!["🔙", "⏰"]);
+    map.insert("ttyl", vec!["👋", "💬"]);
+    map.insert("gg", vec!["🎮", "🤝"]);
+    map.insert("gamer", vec!["🎮", "👾"]);
+    map.insert("noob", vec!["🐥", "🤡"]);
+    map.insert("pro", vec!["⭐", "🏆"]);
+    map.insert("pwn", vec!["💪", "🏆"]);
+    map.insert("pwned", vec!["☠️", "💀"]);
+    map.insert("owned", vec!["☠️", "😂"]);
+    map.insert("rekt", vec!["💀", "☠️"]);
+    map.insert("ez", vec!["😎", "💯"]);
+    map.insert("easy", vec!["😎", "👍"]);
 
     // Misc popular culture
     map.insert("alien", vec!["👽", "🛸"]);

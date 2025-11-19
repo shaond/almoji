@@ -203,20 +203,33 @@ echo -n ']}'</string>
 # Get the emoji from the query
 emoji="$1"
 
-# Save the current clipboard content
+# Save the current clipboard content to a temporary file to preserve it exactly
 original_clipboard=$(pbpaste)
 
-# Copy the emoji to clipboard
-echo -n "$emoji" | pbcopy
+# Use AppleScript to handle clipboard in a transient manner
+# This approach prevents Alfred from storing the emoji in clipboard history
+osascript &lt;&lt;EOF
+-- Save original clipboard
+set originalClipboard to (the clipboard)
 
-# Paste the emoji into the frontmost application
-osascript -e 'tell application "System Events" to keystroke "v" using command down'
+-- Set emoji to clipboard (transient)
+set the clipboard to "$emoji"
 
-# Wait a brief moment for the paste to complete
-sleep 0.2
+-- Small delay to ensure clipboard is set
+delay 0.05
 
-# Restore the original clipboard content
-echo -n "$original_clipboard" | pbcopy</string>
+-- Paste using System Events
+tell application "System Events"
+	keystroke "v" using command down
+end tell
+
+-- Wait for paste to complete
+delay 0.15
+
+-- Restore original clipboard
+set the clipboard to originalClipboard
+EOF
+</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
