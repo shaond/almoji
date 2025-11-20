@@ -444,6 +444,7 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
     map.insert("laughing", vec!["😂", "🤣"]);
     map.insert("smh", vec!["🤦", "😔"]);
     map.insert("facepalm", vec!["🤦"]);
+    map.insert("fart", vec!["💨"]);
     map.insert("eyeroll", vec!["🙄"]);
     map.insert("shrug", vec!["🤷"]);
     map.insert("idk", vec!["🤷", "🤔"]);
