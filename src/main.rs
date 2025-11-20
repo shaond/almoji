@@ -680,6 +680,30 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
     map.insert("emacs", vec!["⌨️", "🟣"]);
     map.insert("vscode", vec!["🔵", "💻"]);
     map.insert("ide", vec!["💻", "🔧"]);
+    map.insert("chatgpt", vec!["🤖", "🧠"]);
+    map.insert("gpt", vec!["🤖", "🧠"]);
+    map.insert("gpt-4", vec!["🤖", "🧠✨"]);
+    map.insert("gpt4", vec!["🤖", "🧠✨"]);
+    map.insert("openai", vec!["🔵✨", "🤖"]);
+    map.insert("codex", vec!["🧠", "💻"]);
+    map.insert("github copilot", vec!["🧑‍✈️", "💻"]);
+    map.insert("copilot", vec!["🧑‍✈️", "💻"]);
+    map.insert("gemini", vec!["💎"]);
+    map.insert("google gemini", vec!["💎"]);
+    map.insert("claude", vec!["✳️"]);
+    map.insert("claude code", vec!["✳️", "💻"]);
+    map.insert("anthropic", vec!["✳️"]);
+    map.insert("grok", vec!["🧠", "💡"]);
+    map.insert("qwen", vec!["🧠", "🌏"]);
+    map.insert("tongyi qianwen", vec!["🧠", "🌏"]);
+    map.insert("llama", vec!["🦙", "🤖"]);
+    map.insert("llama2", vec!["🦙", "🤖"]);
+    map.insert("llama 2", vec!["🦙", "🤖"]);
+    map.insert("mistral", vec!["🌬️", "🤖"]);
+    map.insert("perplexity", vec!["❓", "🤖"]);
+    map.insert("midjourney", vec!["🎨", "🤖"]);
+    map.insert("stable diffusion", vec!["🎨", "🖌️"]);
+    map.insert("runwayml", vec!["🎬", "🤖"]);
 
     // Science and academic
     map.insert("dna", vec!["🧬"]);
