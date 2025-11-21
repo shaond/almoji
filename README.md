@@ -2,6 +2,8 @@
 
 A blazingly fast emoji search CLI for macOS that helps you find emojis using keywords.
 
+I built this to be used with [Alfred on macOS](https://alfred.app/). I include a huge number of alternative emojis which the other emoji plugins do not include. There's a heap of commonly used slang for emojis used by real people (take a look at the [source code](https://github.com/shaond/almoji/blob/main/src/main.rs)). I also wrote this in Rust, so it's **super** quick.
+
 ## Features
 
 - **Extremely Fast**: Uses compile-time perfect hash maps (PHF) for O(1) emoji lookups
