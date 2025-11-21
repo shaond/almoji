@@ -40,34 +40,27 @@
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
 				<key>argumenttreatemptyqueryasnil</key>
-				<false/>
+				<true/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
 				<string>;</string>
 				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
 				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
 				<key>runningsubtext</key>
-				<string>Searching for emojis...</string>
+				<string>Searching...</string>
 				<key>script</key>
 				<string>#!/bin/bash
-
-# Function to output error JSON
-error_json() {
-    local title="$1"
-    local subtitle="$2"
-    echo "{\"items\": [{\"title\": \"$title\", \"subtitle\": \"$subtitle\", \"valid\": false}]}"
-}
 
 # Find almoji binary
 almoji_bin=""
@@ -80,19 +73,19 @@ elif [ -x "$HOME/.cargo/bin/almoji" ]; then
 elif [ -x "/usr/local/bin/almoji" ]; then
     almoji_bin="/usr/local/bin/almoji"
 else
-    error_json "Almoji not found" "Install with: cargo install --path /path/to/almoji"
+    echo '{"items": [{"title": "Almoji not found", "subtitle": "Please install almoji and make it available in your PATH.", "valid": false}]}'
     exit 0
 fi
 
-# Get the query from Alfred
+# Get query from Alfred
 query="$1"
 
-# Get configuration variables (with defaults)
+# Get configuration from workflow variables
 skin_tone="${skin_tone:-}"
 gender="${gender:-}"
 
 # Build the almoji command arguments
-args="--limit 20"
+args="--alfred"
 
 # Add skin tone if set
 if [ -n "$skin_tone" ]; then
@@ -106,70 +99,11 @@ fi
 
 # Add query
 if [ -n "$query" ]; then
-    args="$args $query"
+    args="$args -- $query"
 fi
 
-# Execute almoji and capture both stdout and stderr
-temp_err=$(mktemp)
-emoji_results=$("$almoji_bin" $args 2&gt;"$temp_err")
-exit_code=$?
-error_output=$(cat "$temp_err")
-rm -f "$temp_err"
-
-# Check if command failed
-if [ $exit_code -ne 0 ]; then
-    if [ -n "$error_output" ]; then
-        error_json "Almoji error" "$error_output"
-    else
-        error_json "Almoji failed" "Exit code: $exit_code"
-    fi
-    exit 0
-fi
-
-# Check if we got results
-if [ -z "$emoji_results" ]; then
-    error_json "No emojis found" "Try a different search term"
-    exit 0
-fi
-
-# Start building JSON output
-echo -n '{"items": ['
-
-first=true
-# Store regex in variable to avoid bash parsing issues
-regex='^(.+)[[:space:]]\(([^)]+)\)$'
-
-while IFS= read -r line; do
-    # Parse the emoji and keyword from output like "🔥 (fire)"
-    if [[ $line =~ $regex ]]; then
-        emoji="${BASH_REMATCH[1]}"
-        keyword="${BASH_REMATCH[2]}"
-
-        # Add comma separator for all but first item
-        if [ "$first" = true ]; then
-            first=false
-        else
-            echo -n ','
-        fi
-
-        # Build JSON item
-        cat &lt;&lt;EOF
-{
-    "uid": "$keyword",
-    "title": "$emoji",
-    "subtitle": "$keyword",
-    "arg": "$emoji",
-    "text": {
-        "copy": "$emoji",
-        "largetype": "$emoji"
-    },
-    "valid": true
-}
-EOF
-    fi
-done &lt;&lt;&lt; "$emoji_results"
-
-echo -n ']}'</string>
+# Execute almoji and pass its JSON output directly to Alfred
+"$almoji_bin" $args</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -193,44 +127,19 @@ echo -n ']}'</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>#!/bin/bash
-
-# Get the emoji from the query
-emoji="$1"
-
-# Save original clipboard using native pbpaste (fast)
-original_clipboard=$(pbpaste)
-
-# Set emoji to clipboard using native pbcopy (much faster than AppleScript)
-echo -n "$emoji" | pbcopy
-
-# Paste using AppleScript System Events (minimal overhead with single command)
-osascript -e 'tell application "System Events" to keystroke "v" using command down'
-
-# Brief delay to ensure paste completes before restoring clipboard
-sleep 0.03
-
-# Restore original clipboard using native pbcopy (fast)
-echo -n "$original_clipboard" | pbcopy
-</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>transient</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
 			<string>B2C3D4E5-F6A7-4B5C-9D0E-1F2A3B4C5D6E</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
