@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>D5E6F7A8-B9C0-4D5E-9F0A-1B2C3D4E5F67</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A1B2C3D4-E5F6-4A5B-8C9D-0E1F2A3B4C5D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Almoji</string>
@@ -141,6 +154,39 @@ fi
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>;</string>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>14</integer>
+				<key>hotmod</key>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>E</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedapps</key>
+				<array/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>D5E6F7A8-B9C0-4D5E-9F0A-1B2C3D4E5F67</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Almoji Alfred Workflow
@@ -149,6 +195,7 @@ Search for emojis quickly using the Almoji CLI.
 
 Usage:
 - Type '; &lt;search term&gt;' to search for emojis
+- Press Cmd+Shift+E to open the search window with the semicolon pre-filled
 - Press Enter to paste the emoji into the frontmost application
 - Your clipboard content is automatically preserved and restored
 
@@ -170,14 +217,21 @@ The workflow will automatically find almoji if it's in:
 		<key>A1B2C3D4-E5F6-4A5B-8C9D-0E1F2A3B4C5D</key>
 		<dict>
 			<key>xpos</key>
-			<integer>120</integer>
+			<integer>300</integer>
 			<key>ypos</key>
 			<integer>180</integer>
 		</dict>
 		<key>B2C3D4E5-F6A7-4B5C-9D0E-1F2A3B4C5D6E</key>
 		<dict>
 			<key>xpos</key>
-			<integer>420</integer>
+			<integer>500</integer>
+			<key>ypos</key>
+			<integer>180</integer>
+		</dict>
+		<key>D5E6F7A8-B9C0-4D5E-9F0A-1B2C3D4E5F67</key>
+		<dict>
+			<key>xpos</key>
+			<integer>100</integer>
 			<key>ypos</key>
 			<integer>180</integer>
 		</dict>
