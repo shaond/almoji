@@ -8,11 +8,11 @@
 	<string>Productivity</string>
 	<key>connections</key>
 	<dict>
-		<key>A1B2C3D4-E5F6-4A5B-8C9D-0E1F2A3B4C5D</key>
+		<key>D5E6F7A8-B9C0-4D5E-9F0A-1B2C3D4E5F67</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>B2C3D4E5-F6A7-4B5C-9D0E-1F2A3B4C5D6E</string>
+				<string>A1B2C3D4-E5F6-4A5B-8C9D-0E1F2A3B4C5D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -21,11 +21,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>D5E6F7A8-B9C0-4D5E-9F0A-1B2C3D4E5F67</key>
+		<key>A1B2C3D4-E5F6-4A5B-8C9D-0E1F2A3B4C5D</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A1B2C3D4-E5F6-4A5B-8C9D-0E1F2A3B4C5D</string>
+				<string>B2C3D4E5-F6A7-4B5C-9D0E-1F2A3B4C5D6E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -57,11 +57,9 @@
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>escaping</key>
 				<integer>102</integer>
-				<key>keyword</key>
-				<string>;</string>
 				<key>queuedelaycustom</key>
 				<integer>1</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -126,7 +124,7 @@ fi
 				<key>title</key>
 				<string>Almoji Search</string>
 				<key>type</key>
-				<integer>0</integer>
+				<integer>4</integer>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -160,9 +158,7 @@ fi
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
-				<integer>3</integer>
-				<key>argumenttext</key>
-				<string>;</string>
+				<integer>0</integer>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -194,10 +190,9 @@ fi
 Search for emojis quickly using the Almoji CLI.
 
 Usage:
-- Type '; &lt;search term&gt;' to search for emojis
-- Press Cmd+Shift+E to open the search window with the semicolon pre-filled
-- Press Enter to paste the emoji into the frontmost application
-- Your clipboard content is automatically preserved and restored
+- Press Cmd+Shift+E to open the search window and start typing your search term.
+- Press Enter to paste the emoji into the frontmost application.
+- Your clipboard content is automatically preserved and restored.
 
 Configuration:
 - skin_tone: Set default skin tone (light, medium-light, medium, medium-dark, dark)
@@ -206,7 +201,7 @@ Configuration:
 Installation:
 1. Install almoji: cargo install --path /path/to/almoji
 2. Import this workflow into Alfred
-3. Type '; fire' to search for fire emojis
+3. Press Cmd+Shift+E to start searching for emojis.
 
 The workflow will automatically find almoji if it's in:
 - Your PATH
