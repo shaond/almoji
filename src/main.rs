@@ -820,8 +820,7 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
     map.insert("technologist", vec!["🧑‍💻"]);
     map.insert("money_with_wings", vec!["💸"]);
     map.insert("thread", vec!["🧵"]);
-    map.insert("safety_vest", vec!["🦺"])
-        ;
+    map.insert("safety_vest", vec!["🦺"]);
     map
 });
 
@@ -831,7 +830,7 @@ fn search_emojis(query: &str, limit: usize) -> Vec<(String, &'static emojis::Emo
     let mut results = Vec::new();
     let mut seen: HashMap<String, bool> = HashMap::new();
 
-    // Check custom slang mappings first - exact match
+    // 1. Check custom slang mappings first - exact match
     if let Some(slang_emojis) = SLANG_MAP.get(query_lower.as_str()) {
         for emoji_str in slang_emojis {
             if results.len() >= limit {
@@ -862,32 +861,60 @@ fn search_emojis(query: &str, limit: usize) -> Vec<(String, &'static emojis::Emo
                 // If not found in database, it might be a group of emojis (e.g., "💗💜💙")
                 // In this case, we'll treat it as a raw emoji string
                 if !found {
-                    // Use a dummy emoji object, but store the actual emoji string in the result
-                    // We'll use a marker in the keyword to indicate this is a raw emoji string
                     if let Some(dummy_emoji) = emojis::iter().next() {
-                        results.push((format!("__raw__:{}|{}", emoji_str, query_lower), dummy_emoji));
+                        results.push((
+                            format!("__raw__:{}|{}", emoji_str, query_lower),
+                            dummy_emoji,
+                        ));
                         seen.insert(key, true);
                     }
                 }
             }
         }
 
-        // If we found slang matches and hit the limit, return early
         if results.len() >= limit {
             return results;
         }
     }
 
-    // Check custom slang mappings - partial match (substring)
+    // 2. Exact matches on standard emoji names
+    for emoji in emojis::iter() {
+        if results.len() >= limit {
+            break;
+        }
+
+        let key = emoji.as_str().to_string();
+        if seen.contains_key(&key) {
+            continue;
+        }
+
+        // Check name (e.g., "smiling face")
+        if emoji.name().to_lowercase() == query_lower {
+            results.push((emoji.name().to_lowercase().replace(' ', ""), emoji));
+            seen.insert(key, true);
+            continue;
+        }
+
+        // Check shortcodes (e.g., ":smile:")
+        for shortcode in emoji.shortcodes() {
+            if shortcode.trim_matches(':').to_lowercase() == query_lower {
+                results.push((shortcode.trim_matches(':').to_string(), emoji));
+                seen.insert(key, true);
+                break;
+            }
+        }
+    }
+
+    // 3. Check custom slang mappings - prefix match
     if results.len() < limit {
         for (slang_term, slang_emojis) in SLANG_MAP.iter() {
-            // Skip exact matches (already handled above)
+            // Skip exact matches (already handled)
             if *slang_term == query_lower.as_str() {
                 continue;
             }
 
-            // Check if the query is a substring of the slang term
-            if slang_term.contains(&query_lower) {
+            // Check if slang term starts with query
+            if slang_term.starts_with(&query_lower) {
                 for emoji_str in slang_emojis {
                     if results.len() >= limit {
                         break;
@@ -898,12 +925,10 @@ fn search_emojis(query: &str, limit: usize) -> Vec<(String, &'static emojis::Emo
                         continue;
                     }
 
-                    // Try to find the emoji in the database
                     if let Some(emoji_obj) = emojis::get(emoji_str) {
                         results.push((slang_term.to_string(), emoji_obj));
                         seen.insert(key, true);
                     } else {
-                        // For compound emojis not in the database, try to find by iterating
                         let mut found = false;
                         for emoji in emojis::iter() {
                             if emoji.as_str() == *emoji_str {
@@ -914,55 +939,25 @@ fn search_emojis(query: &str, limit: usize) -> Vec<(String, &'static emojis::Emo
                             }
                         }
 
-                        // If not found in database, it might be a group of emojis (e.g., "💗💜💙")
-                        // In this case, we'll treat it as a raw emoji string
                         if !found {
-                            // Use a dummy emoji object, but store the actual emoji string in the result
-                            // We'll use a marker in the keyword to indicate this is a raw emoji string
                             if let Some(dummy_emoji) = emojis::iter().next() {
-                                results.push((format!("__raw__:{}|{}", emoji_str, slang_term), dummy_emoji));
+                                results.push((
+                                    format!("__raw__:{}|{}", emoji_str, slang_term),
+                                    dummy_emoji,
+                                ));
                                 seen.insert(key, true);
                             }
                         }
                     }
                 }
             }
-
             if results.len() >= limit {
                 break;
             }
         }
     }
 
-    // First pass: exact matches on name
-    for emoji in emojis::iter() {
-        if results.len() >= limit {
-            break;
-        }
-
-        // Check name (e.g., "smiling face")
-        if emoji.name().to_lowercase() == query_lower {
-            let key = emoji.as_str().to_string();
-            if !seen.contains_key(&key) {
-                results.push((emoji.name().to_lowercase().replace(' ', ""), emoji));
-                seen.insert(key, true);
-            }
-        }
-
-        // Check shortcodes (e.g., ":smile:")
-        for shortcode in emoji.shortcodes() {
-            if shortcode.trim_matches(':').to_lowercase() == query_lower {
-                let key = emoji.as_str().to_string();
-                if !seen.contains_key(&key) {
-                    results.push((shortcode.trim_matches(':').to_string(), emoji));
-                    seen.insert(key, true);
-                    break;
-                }
-            }
-        }
-    }
-
-    // Second pass: prefix matches
+    // 4. Prefix matches on standard emoji names
     if results.len() < limit {
         for emoji in emojis::iter() {
             if results.len() >= limit {
@@ -974,8 +969,9 @@ fn search_emojis(query: &str, limit: usize) -> Vec<(String, &'static emojis::Emo
                 continue;
             }
 
-            // Check if name starts with query
             let name_normalized = emoji.name().to_lowercase();
+
+            // Check if name starts with query
             if name_normalized.starts_with(&query_lower) {
                 results.push((name_normalized.replace(' ', ""), emoji));
                 seen.insert(key.clone(), true);
@@ -1004,7 +1000,59 @@ fn search_emojis(query: &str, limit: usize) -> Vec<(String, &'static emojis::Emo
         }
     }
 
-    // Third pass: substring matches
+    // 5. Check custom slang mappings - substring match
+    if results.len() < limit {
+        for (slang_term, slang_emojis) in SLANG_MAP.iter() {
+            // Skip exact and prefix matches (already handled)
+            if *slang_term == query_lower.as_str() || slang_term.starts_with(&query_lower) {
+                continue;
+            }
+
+            // Check if slang term contains query
+            if slang_term.contains(&query_lower) {
+                for emoji_str in slang_emojis {
+                    if results.len() >= limit {
+                        break;
+                    }
+
+                    let key = emoji_str.to_string();
+                    if seen.contains_key(&key) {
+                        continue;
+                    }
+
+                    if let Some(emoji_obj) = emojis::get(emoji_str) {
+                        results.push((slang_term.to_string(), emoji_obj));
+                        seen.insert(key, true);
+                    } else {
+                        let mut found = false;
+                        for emoji in emojis::iter() {
+                            if emoji.as_str() == *emoji_str {
+                                results.push((slang_term.to_string(), emoji));
+                                seen.insert(key.clone(), true);
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        if !found {
+                            if let Some(dummy_emoji) = emojis::iter().next() {
+                                results.push((
+                                    format!("__raw__:{}|{}", emoji_str, slang_term),
+                                    dummy_emoji,
+                                ));
+                                seen.insert(key, true);
+                            }
+                        }
+                    }
+                }
+            }
+            if results.len() >= limit {
+                break;
+            }
+        }
+    }
+
+    // 6. Substring matches on standard emoji names
     if results.len() < limit {
         for emoji in emojis::iter() {
             if results.len() >= limit {
@@ -1016,8 +1064,9 @@ fn search_emojis(query: &str, limit: usize) -> Vec<(String, &'static emojis::Emo
                 continue;
             }
 
-            // Check if name contains query
             let name_normalized = emoji.name().to_lowercase();
+
+            // Check if name contains query
             if name_normalized.contains(&query_lower) {
                 results.push((name_normalized.replace(' ', ""), emoji));
                 seen.insert(key.clone(), true);
@@ -1215,7 +1264,9 @@ fn main() {
             })
             .collect();
 
-        let response = AlfredResponse { items: alfred_items };
+        let response = AlfredResponse {
+            items: alfred_items,
+        };
         println!("{}", serde_json::to_string(&response).unwrap());
     } else {
         for (keyword, emoji) in results {
