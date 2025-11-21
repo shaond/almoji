@@ -445,6 +445,380 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
     map.insert("diwali", vec!["🪔", "🎆"]);
     map.insert("cricket", vec!["🏏"]);
     map.insert("shabash", vec!["🙌"]);
+
+    // Emotions and reactions
+    map.insert("lol", vec!["😂", "🤣"]);
+    map.insert("lmao", vec!["😂", "🤣"]);
+    map.insert("lmfao", vec!["🤣", "😂"]);
+    map.insert("rofl", vec!["🤣", "😂"]);
+    map.insert("rotfl", vec!["🤣", "😂"]);
+    map.insert("haha", vec!["😂", "🤣", "😆"]);
+    map.insert("hahaha", vec!["😂", "🤣"]);
+    map.insert("hehe", vec!["😆", "😄"]);
+    map.insert("hehehe", vec!["😆", "😄"]);
+    map.insert("hihi", vec!["😊", "😄"]);
+    map.insert("hoho", vec!["🎅", "😄"]);
+    map.insert("huhu", vec!["😢", "😭"]);
+    map.insert("teehee", vec!["🤭", "😊"]);
+    map.insert("giggle", vec!["🤭", "😄"]);
+    map.insert("chuckle", vec!["😄", "😆"]);
+    map.insert("snicker", vec!["😏", "😆"]);
+    map.insert("guffaw", vec!["😂", "🤣"]);
+    map.insert("cackle", vec!["🤣", "😈"]);
+    map.insert("crying", vec!["😭", "😢"]);
+    map.insert("laugh", vec!["😂", "🤣"]);
+    map.insert("laughing", vec!["😂", "🤣"]);
+    map.insert("smh", vec!["🤦", "😔"]);
+    map.insert("facepalm", vec!["🤦"]);
+    map.insert("fart", vec!["💨"]);
+    map.insert("eyeroll", vec!["🙄"]);
+    map.insert("shrug", vec!["🤷"]);
+    map.insert("idk", vec!["🤷", "🤔"]);
+    map.insert("thinking", vec!["🤔"]);
+    map.insert("hmm", vec!["🤔"]);
+    map.insert("wow", vec!["😮", "🤯"]);
+    map.insert("omg", vec!["😱", "🤯"]);
+    map.insert("yikes", vec!["😬", "😳"]);
+    map.insert("oops", vec!["😬", "🤭"]);
+    map.insert("awkward", vec!["😬", "😅"]);
+    map.insert("nervous", vec!["😅", "😰"]);
+    map.insert("sweating", vec!["😅", "💦"]);
+    map.insert("tired", vec!["😴", "😪", "😩"]);
+    map.insert("exhausted", vec!["😴", "😫"]);
+    map.insert("done", vec!["😑", "💀"]);
+    map.insert("upset", vec!["😠", "😡"]);
+    map.insert("angry", vec!["😡", "🤬"]);
+    map.insert("mad", vec!["😡", "😠"]);
+    map.insert("gross", vec!["🤮", "🤢"]);
+    map.insert("yuk", vec!["🤮", "🤢"]);
+    map.insert("yuck", vec!["🤮", "🤢"]);
+    map.insert("barf", vec!["🤮"]);
+    map.insert("puke", vec!["🤮"]);
+    map.insert("vomit", vec!["🤮"]);
+    map.insert("sick", vec!["🤢", "🤮", "🤒"]);
+    map.insert("nauseous", vec!["🤢"]);
+    map.insert("nauseated", vec!["🤢", "🤮"]);
+    map.insert("disgusting", vec!["🤮", "🤢"]);
+    map.insert("love", vec!["❤️", "💕", "😍"]);
+    map.insert("heart", vec!["❤️", "💕", "💖"]);
+    map.insert("cute", vec!["🥰", "😊", "🩷"]);
+    map.insert("kiss", vec!["😘", "💋"]);
+    map.insert("hug", vec!["🤗", "🫂"]);
+    map.insert("cool", vec!["😎", "🆒"]);
+    map.insert("nice", vec!["👍", "👌"]);
+    map.insert("ok", vec!["👌", "👍"]);
+    map.insert("okay", vec!["👌", "👍"]);
+    map.insert("yes", vec!["✅", "👍"]);
+    map.insert("no", vec!["❌", "👎"]);
+    map.insert("stop", vec!["✋", "🛑"]);
+    map.insert("pray", vec!["🙏"]);
+    map.insert("thanks", vec!["🙏", "👍"]);
+    map.insert("please", vec!["🙏"]);
+
+    // Money and success
+    map.insert("money", vec!["💰", "💵", "💸"]);
+    map.insert("cash", vec!["💵", "💰"]);
+    map.insert("dollars", vec!["💵", "💲"]);
+    map.insert("rich", vec!["💰", "💎", "🤑"]);
+    map.insert("broke", vec!["💸", "😭"]);
+    map.insert("expensive", vec!["💰", "💸"]);
+    map.insert("cheap", vec!["💵"]);
+    map.insert("100", vec!["💯"]);
+    map.insert("perfect", vec!["💯", "✨"]);
+    map.insert("win", vec!["🏆", "🥇"]);
+    map.insert("winner", vec!["🏆", "👑"]);
+    map.insert("champion", vec!["🏆", "👑"]);
+    map.insert("king", vec!["👑", "🤴"]);
+    map.insert("queen", vec!["👑", "👸"]);
+    map.insert("boss", vec!["👔", "💼"]);
+    map.insert("goals", vec!["🎯", "💯"]);
+    map.insert("success", vec!["🎉", "🏆"]);
+
+    // Food slang (beyond existing)
+    map.insert("snack", vec!["😋", "🍪"]);
+    map.insert("thirsty", vec!["💦", "🥵", "💜"]);
+    map.insert("sausage", vec!["🌭", "🍆"]);
+    map.insert("taco", vec!["🌮", "🍑"]);
+    map.insert("cherry", vec!["🍒"]);
+    map.insert("melons", vec!["🍉", "🍈"]);
+
+    // Actions and activities
+    map.insert("party", vec!["🎉", "🥳"]);
+    map.insert("celebrate", vec!["🎉", "🍾"]);
+    map.insert("dance", vec!["💃", "🕺"]);
+    map.insert("sleep", vec!["😴", "💤"]);
+    map.insert("nap", vec!["😴", "💤"]);
+    map.insert("eat", vec!["🍽️", "😋"]);
+    map.insert("hungry", vec!["🍔", "😋"]);
+    map.insert("workout", vec!["💪", "🏋️"]);
+    map.insert("gym", vec!["💪", "🏋️"]);
+    map.insert("save", vec!["💾", "💿"]);
+    map.insert("saved", vec!["💾", "✅"]);
+    map.insert("run", vec!["🏃", "💨"]);
+    map.insert("walk", vec!["🚶", "👣"]);
+    map.insert("drive", vec!["🚗", "🚙"]);
+    map.insert("fly", vec!["✈️", "🛫"]);
+    map.insert("travel", vec!["✈️", "🌍"]);
+    map.insert("vacation", vec!["🏖️", "✈️"]);
+    map.insert("beach", vec!["🏖️", "🌊"]);
+    map.insert("sun", vec!["☀️", "🌞"]);
+    map.insert("rain", vec!["🌧️", "☔"]);
+    map.insert("snow", vec!["❄️", "⛄"]);
+    map.insert("storm", vec!["⛈️", "🌩️"]);
+
+    // Technology and internet
+    map.insert("computer", vec!["💻", "🖥️"]);
+    map.insert("phone", vec!["📱", "☎️"]);
+    map.insert("smartphone", vec!["📱"]);
+    map.insert("internet", vec!["🌐", "💻"]);
+    map.insert("wifi", vec!["📶", "🛜"]);
+    map.insert("email", vec!["📧", "✉️"]);
+    map.insert("message", vec!["💬", "📱"]);
+    map.insert("chat", vec!["💬", "💭"]);
+    map.insert("call", vec!["📞", "☎️"]);
+    map.insert("video", vec!["📹", "🎥"]);
+    map.insert("camera", vec!["📷", "📸"]);
+    map.insert("photo", vec!["📷", "🖼️"]);
+    map.insert("selfie", vec!["🤳", "📸"]);
+    map.insert("game", vec!["🎮", "🕹️"]);
+    map.insert("gaming", vec!["🎮", "🕹️"]);
+    map.insert("music", vec!["🎵", "🎶"]);
+    map.insert("song", vec!["🎵", "🎤"]);
+
+    // Internet and gaming slang
+    map.insert("spam", vec!["📧", "🚫"]);
+    map.insert("hack", vec!["💻", "🔓"]);
+    map.insert("hacker", vec!["👨‍💻", "🔓"]);
+    map.insert("glitch", vec!["⚡", "🐛"]);
+    map.insert("lag", vec!["🐌", "⏳"]);
+    map.insert("afk", vec!["🚶", "⌨️"]);
+    map.insert("brb", vec!["🔙", "⏰"]);
+    map.insert("ttyl", vec!["👋", "💬"]);
+    map.insert("gg", vec!["🎮", "🤝"]);
+    map.insert("gamer", vec!["🎮", "👾"]);
+    map.insert("noob", vec!["🐥", "🤡"]);
+    map.insert("pro", vec!["⭐", "🏆"]);
+    map.insert("pwn", vec!["💪", "🏆"]);
+    map.insert("pwned", vec!["☠️", "💀"]);
+    map.insert("owned", vec!["☠️", "😂"]);
+    map.insert("rekt", vec!["💀", "☠️"]);
+    map.insert("ez", vec!["😎", "💯"]);
+    map.insert("easy", vec!["😎", "👍"]);
+
+    // Misc popular culture
+    map.insert("alien", vec!["👽", "🛸"]);
+    map.insert("ufo", vec!["🛸", "👽"]);
+    map.insert("robot", vec!["🤖"]);
+    map.insert("zombie", vec!["🧟"]);
+    map.insert("vampire", vec!["🧛"]);
+    map.insert("witch", vec!["🧙", "🔮"]);
+    map.insert("magic", vec!["✨", "🪄"]);
+    map.insert("wizard", vec!["🧙", "🪄"]);
+    map.insert("devil", vec!["😈", "👿"]);
+    map.insert("angel", vec!["😇", "👼"]);
+    map.insert("demon", vec!["👿", "😈"]);
+    map.insert("skull", vec!["💀", "☠️"]);
+    map.insert("pirate", vec!["🏴‍☠️", "☠️"]);
+    map.insert("ninja", vec!["🥷"]);
+    map.insert("superhero", vec!["🦸"]);
+    map.insert("hero", vec!["🦸", "🏆"]);
+
+    // Programming languages and tech
+    map.insert("python", vec!["🐍"]);
+    map.insert("rust", vec!["🦀"]);
+    map.insert("javascript", vec!["🟨", "☕"]);
+    map.insert("js", vec!["🟨"]);
+    map.insert("typescript", vec!["🔷", "🔵"]);
+    map.insert("ts", vec!["🔷"]);
+    map.insert("java", vec!["☕"]);
+    map.insert("go", vec!["🐹"]);
+    map.insert("golang", vec!["🐹"]);
+    map.insert("ruby", vec!["💎", "🔴"]);
+    map.insert("php", vec!["🐘"]);
+    map.insert("swift", vec!["🐦", "🧡"]);
+    map.insert("kotlin", vec!["🅺", "🟣"]);
+    map.insert("csharp", vec!["🎵", "💜"]);
+    map.insert("cplusplus", vec!["⚙️"]);
+    map.insert("cpp", vec!["⚙️"]);
+    map.insert("c++", vec!["⚙️"]);
+    map.insert("clang", vec!["🔧"]);
+    map.insert("perl", vec!["🐪"]);
+    map.insert("haskell", vec!["🎓", "λ"]);
+    map.insert("elixir", vec!["💧", "🟣"]);
+    map.insert("scala", vec!["⚖️", "🔴"]);
+    map.insert("dart", vec!["🎯", "🔵"]);
+    map.insert("rlang", vec!["📊", "📈"]);
+    map.insert("julia", vec!["🟣", "🔴", "🟢"]);
+    map.insert("lua", vec!["🌙", "🔵"]);
+    map.insert("html", vec!["🌐", "📄"]);
+    map.insert("css", vec!["🎨", "🎭"]);
+    map.insert("sql", vec!["🗄️", "💾"]);
+    map.insert("bash", vec!["🐚", "💻"]);
+    map.insert("shell", vec!["🐚", "💻"]);
+    map.insert("powershell", vec!["💙", "💻"]);
+    map.insert("assembly", vec!["⚙️", "🔩"]);
+    map.insert("asm", vec!["⚙️"]);
+
+    // Programming and dev culture
+    map.insert("bug", vec!["🐛"]);
+    map.insert("debug", vec!["🐛🔨", "🔍"]);
+    map.insert("code", vec!["💻", "👨‍💻"]);
+    map.insert("coding", vec!["💻", "⌨️"]);
+    map.insert("deploy", vec!["🚀", "📦"]);
+    map.insert("shipped", vec!["🚢", "✅"]);
+    map.insert("merge", vec!["🔀"]);
+    map.insert("commit", vec!["💾", "✅"]);
+    map.insert("push", vec!["⬆️", "📤"]);
+    map.insert("pull", vec!["⬇️", "📥"]);
+    map.insert("fork", vec!["🍴"]);
+    map.insert("clone", vec!["👯‍♂️", "💾"]);
+    map.insert("branch", vec!["🌳", "🔀"]);
+    map.insert("git", vec!["🐙", "📦"]);
+    map.insert("github", vec!["🐙", "😺"]);
+    map.insert("gitlab", vec!["🦊"]);
+    map.insert("stackoverflow", vec!["📚", "❓"]);
+    map.insert("production", vec!["🏭", "🚀"]);
+    map.insert("localhost", vec!["🏠💻", "💻"]);
+    map.insert("server", vec!["🖥️", "☁️"]);
+    map.insert("docker", vec!["🐳"]);
+    map.insert("kubernetes", vec!["☸️"]);
+    map.insert("k8s", vec!["☸️"]);
+    map.insert("api", vec!["🔌", "🔗"]);
+    map.insert("database", vec!["🗄️", "💾"]);
+    map.insert("frontend", vec!["🎨", "💻"]);
+    map.insert("backend", vec!["⚙️", "🖥️"]);
+    map.insert("fullstack", vec!["🎨⚙️", "💻"]);
+    map.insert("devops", vec!["🔧🚀", "⚙️"]);
+    map.insert("ci", vec!["🔄", "✅"]);
+    map.insert("cd", vec!["🚀", "📦"]);
+    map.insert("cicd", vec!["🔄🚀"]);
+    map.insert("cloud", vec!["☁️", "☁️💻"]);
+    map.insert("aws", vec!["🟧", "☁️"]);
+    map.insert("azure", vec!["🔵", "☁️"]);
+    map.insert("gcp", vec!["🔵🔴🟡", "☁️"]);
+    map.insert("linux", vec!["🐧"]);
+    map.insert("unix", vec!["🖥️", "💻"]);
+    map.insert("macos", vec!["🍎"]);
+    map.insert("windows", vec!["🪟", "💻"]);
+    map.insert("android", vec!["🤖", "📱"]);
+    map.insert("ios", vec!["🍎", "📱"]);
+    map.insert("vim", vec!["⌨️", "🟢"]);
+    map.insert("emacs", vec!["⌨️", "🟣"]);
+    map.insert("vscode", vec!["🔵", "💻"]);
+    map.insert("ide", vec!["💻", "🔧"]);
+    map.insert("chatgpt", vec!["🤖", "🧠"]);
+    map.insert("gpt", vec!["🤖", "🧠"]);
+    map.insert("gpt-4", vec!["🤖", "🧠✨"]);
+    map.insert("gpt4", vec!["🤖", "🧠✨"]);
+    map.insert("openai", vec!["🔵✨", "🤖"]);
+    map.insert("codex", vec!["🧠", "💻"]);
+    map.insert("github copilot", vec!["🧑‍✈️", "💻"]);
+    map.insert("copilot", vec!["🧑‍✈️", "💻"]);
+    map.insert("gemini", vec!["💎"]);
+    map.insert("google gemini", vec!["💎"]);
+    map.insert("claude", vec!["✳️"]);
+    map.insert("claude code", vec!["✳️", "💻"]);
+    map.insert("anthropic", vec!["✳️"]);
+    map.insert("grok", vec!["🧠", "💡"]);
+    map.insert("qwen", vec!["🧠", "🌏"]);
+    map.insert("tongyi qianwen", vec!["🧠", "🌏"]);
+    map.insert("llama", vec!["🦙", "🤖"]);
+    map.insert("llama2", vec!["🦙", "🤖"]);
+    map.insert("llama 2", vec!["🦙", "🤖"]);
+    map.insert("mistral", vec!["🌬️", "🤖"]);
+    map.insert("perplexity", vec!["❓", "🤖"]);
+    map.insert("midjourney", vec!["🎨", "🤖"]);
+    map.insert("stable diffusion", vec!["🎨", "🖌️"]);
+    map.insert("runwayml", vec!["🎬", "🤖"]);
+
+    // Science and academic
+    map.insert("dna", vec!["🧬"]);
+    map.insert("helix", vec!["🧬"]);
+    map.insert("genes", vec!["🧬"]);
+    map.insert("genome", vec!["🧬"]);
+    map.insert("molecule", vec!["⚛️"]);
+    map.insert("atom", vec!["⚛️"]);
+    map.insert("science", vec!["🔬", "🧪"]);
+    map.insert("chemistry", vec!["🧪", "⚗️"]);
+    map.insert("biology", vec!["🧬", "🔬"]);
+    map.insert("physics", vec!["⚛️", "🔬"]);
+    map.insert("math", vec!["➗", "🔢"]);
+    map.insert("calculus", vec!["∫", "📐"]);
+    map.insert("algebra", vec!["✖️", "➕"]);
+    map.insert("geometry", vec!["📐", "△"]);
+
+    // Gitmoji
+    map.insert("art", vec!["🎨"]);
+    map.insert("zap", vec!["⚡"]);
+    map.insert("ambulance", vec!["🚑"]);
+    map.insert("sparkles", vec!["✨"]);
+    map.insert("memo", vec!["📝"]);
+    map.insert("rocket", vec!["🚀"]);
+    map.insert("lipstick", vec!["💄"]);
+    map.insert("tada", vec!["🎉"]);
+    map.insert("white_check_mark", vec!["✅"]);
+    map.insert("lock", vec!["🔒"]);
+    map.insert("closed_lock_with_key", vec!["🔐"]);
+    map.insert("bookmark", vec!["🔖"]);
+    map.insert("rotating_light", vec!["🚨"]);
+    map.insert("construction", vec!["🚧"]);
+    map.insert("green_heart", vec!["💚"]);
+    map.insert("arrow_down", vec!["⬇️"]);
+    map.insert("arrow_up", vec!["⬆️"]);
+    map.insert("pushpin", vec!["📌"]);
+    map.insert("construction_worker", vec!["👷"]);
+    map.insert("chart_with_upwards_trend", vec!["📈"]);
+    map.insert("recycle", vec!["♻️"]);
+    map.insert("heavy_plus_sign", vec!["➕"]);
+    map.insert("heavy_minus_sign", vec!["➖"]);
+    map.insert("wrench", vec!["🔧"]);
+    map.insert("hammer", vec!["🔨"]);
+    map.insert("globe_with_meridians", vec!["🌐"]);
+    map.insert("pencil2", vec!["✏️"]);
+    map.insert("poop", vec!["💩"]);
+    map.insert("rewind", vec!["⏪"]);
+    map.insert("twisted_rightwards_arrows", vec!["🔀"]);
+    map.insert("package", vec!["📦"]);
+    map.insert("truck", vec!["🚚"]);
+    map.insert("page_facing_up", vec!["📄"]);
+    map.insert("bento", vec!["🍱"]);
+    map.insert("ok_hand", vec!["👌"]);
+    map.insert("wheelchair", vec!["♿"]);
+    map.insert("bulb", vec!["💡"]);
+    map.insert("beers", vec!["🍻"]);
+    map.insert("speech_balloon", vec!["💬"]);
+    map.insert("card_file_box", vec!["🗃️"]);
+    map.insert("loud_sound", vec!["🔊"]);
+    map.insert("mute", vec!["🔇"]);
+    map.insert("busts_in_silhouette", vec!["👥"]);
+    map.insert("children_crossing", vec!["🚸"]);
+    map.insert("building_construction", vec!["🏗️"]);
+    map.insert("iphone", vec!["📱"]);
+    map.insert("clown_face", vec!["🤡"]);
+    map.insert("egg", vec!["🥚"]);
+    map.insert("see_no_evil", vec!["🙈"]);
+    map.insert("camera_flash", vec!["📸"]);
+    map.insert("alembic", vec!["⚗️"]);
+    map.insert("mag", vec!["🔍"]);
+    map.insert("label", vec!["🏷️"]);
+    map.insert("seedling", vec!["🌱"]);
+    map.insert("triangular_flag_on_post", vec!["🚩"]);
+    map.insert("goal_net", vec!["🥅"]);
+    map.insert("dizzy", vec!["💫"]);
+    map.insert("wastebasket", vec!["🗑️"]);
+    map.insert("passport_control", vec!["🛂"]);
+    map.insert("adhesive_bandage", vec!["🩹"]);
+    map.insert("monocle_face", vec!["🧐"]);
+    map.insert("coffin", vec!["⚰️"]);
+    map.insert("test_tube", vec!["🧪"]);
+    map.insert("necktie", vec!["👔"]);
+    map.insert("stethoscope", vec!["🩺"]);
+    map.insert("bricks", vec!["🧱"]);
+    map.insert("technologist", vec!["🧑‍💻"]);
+    map.insert("money_with_wings", vec!["💸"]);
+    map.insert("thread", vec!["🧵"]);
+    map.insert("safety_vest", vec!["🦺"])
+        ;
     map
 });
 
@@ -488,7 +862,7 @@ fn search_emojis(query: &str, limit: usize) -> Vec<(String, &'static emojis::Emo
                     // Use a dummy emoji object, but store the actual emoji string in the result
                     // We'll use a marker in the keyword to indicate this is a raw emoji string
                     if let Some(dummy_emoji) = emojis::iter().next() {
-                        results.push((format!("__raw__:{}", emoji_str), dummy_emoji));
+                        results.push((format!("__raw__:{}|{}", emoji_str, query_lower), dummy_emoji));
                         seen.insert(key, true);
                     }
                 }
@@ -543,7 +917,7 @@ fn search_emojis(query: &str, limit: usize) -> Vec<(String, &'static emojis::Emo
                             // Use a dummy emoji object, but store the actual emoji string in the result
                             // We'll use a marker in the keyword to indicate this is a raw emoji string
                             if let Some(dummy_emoji) = emojis::iter().next() {
-                                results.push((format!("__raw__:{}", emoji_str), dummy_emoji));
+                                results.push((format!("__raw__:{}|{}", emoji_str, slang_term), dummy_emoji));
                                 seen.insert(key, true);
                             }
                         }
@@ -796,7 +1170,7 @@ fn main() {
                 }],
             };
             println!("{}", serde_json::to_string(&response).unwrap());
-        } else {
+        } else if !args.query.is_empty() && !args.query.join("").trim().is_empty() {
             eprintln!("No emojis found for: {}", args.query.join(" "));
             std::process::exit(1);
         }
@@ -806,16 +1180,35 @@ fn main() {
     if args.alfred {
         let alfred_items: Vec<AlfredItem> = results
             .into_iter()
-            .map(|(keyword, emoji)| AlfredItem {
-                uid: keyword.clone(),
-                title: emoji.clone(),
-                subtitle: keyword,
-                arg: emoji.clone(),
-                text: AlfredItemText {
-                    copy: emoji.clone(),
-                    largetype: emoji,
-                },
-                valid: true,
+            .map(|(keyword, emoji)| {
+                if keyword.starts_with("__raw__:") {
+                    let parts: Vec<&str> = keyword[8..].splitn(2, '|').collect();
+                    let raw_emoji = parts[0];
+                    let actual_keyword = if parts.len() > 1 { parts[1] } else { "" };
+                    AlfredItem {
+                        uid: actual_keyword.to_string(),
+                        title: raw_emoji.to_string(),
+                        subtitle: actual_keyword.to_string(),
+                        arg: raw_emoji.to_string(),
+                        text: AlfredItemText {
+                            copy: raw_emoji.to_string(),
+                            largetype: raw_emoji.to_string(),
+                        },
+                        valid: true,
+                    }
+                } else {
+                    AlfredItem {
+                        uid: keyword.clone(),
+                        title: emoji.clone(),
+                        subtitle: keyword,
+                        arg: emoji.clone(),
+                        text: AlfredItemText {
+                            copy: emoji.clone(),
+                            largetype: emoji,
+                        },
+                        valid: true,
+                    }
+                }
             })
             .collect();
 
@@ -823,7 +1216,14 @@ fn main() {
         println!("{}", serde_json::to_string(&response).unwrap());
     } else {
         for (keyword, emoji) in results {
-            println!("{} ({})", emoji, keyword);
+            if keyword.starts_with("__raw__:") {
+                let parts: Vec<&str> = keyword[8..].splitn(2, '|').collect();
+                let raw_emoji = parts[0];
+                let actual_keyword = if parts.len() > 1 { parts[1] } else { "" };
+                println!("{} ({})", raw_emoji, actual_keyword);
+            } else {
+                println!("{} ({})", emoji, keyword);
+            }
         }
     }
 }
