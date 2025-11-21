@@ -355,6 +355,9 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
     map.insert("pickme", vec!["🤡", "💁"]);
     map.insert("girlsgirl", vec!["👯‍♀️", "💖"]);
     map.insert("boysmom", vec!["👩", "👦"]);
+    map.insert("sigma", vec!["🗿", "🐺"]);
+    map.insert("67", vec!["🔩", "6️⃣7️⃣"]);
+    map.insert("preppy", vec!["🎀", "💅", "🛍️"]);
 
     // Country/Location slang
     map.insert("aussie", vec!["🇦🇺"]);
