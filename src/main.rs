@@ -1164,8 +1164,15 @@ fn find_emojis(
     skin_tone: &Option<SkinTone>,
     gender: &Option<Gender>,
 ) -> Vec<(String, String)> {
-    let query_joined = query.join(" ");
-    if query_joined.trim().is_empty() {
+    let mut query_joined = query.join(" ");
+
+    // Check if we should combine results (query ends with +)
+    let combine_results = query_joined.trim().ends_with('+');
+    if combine_results {
+        query_joined = query_joined.trim().trim_end_matches('+').trim().to_string();
+    }
+
+    if query_joined.is_empty() {
         return Vec::new();
     }
 
@@ -1181,7 +1188,7 @@ fn find_emojis(
         results = search_emojis(&query_joined, limit);
     }
 
-    results
+    let processed_results: Vec<(String, String)> = results
         .into_iter()
         .map(|(keyword, emoji)| {
             let mut modified_emoji = emoji.as_str().to_string();
@@ -1193,7 +1200,17 @@ fn find_emojis(
             }
             (keyword, modified_emoji)
         })
-        .collect()
+        .collect();
+
+    if combine_results && !processed_results.is_empty() {
+        let combined_emojis: String = processed_results
+            .iter()
+            .map(|(_, emoji)| emoji.as_str())
+            .collect();
+        return vec![(query_joined, combined_emojis)];
+    }
+
+    processed_results
 }
 
 fn main() {
@@ -1315,5 +1332,50 @@ mod tests {
     fn test_limit() {
         let results = search_emojis("a", 5);
         assert!(results.len() <= 5);
+    }
+
+    #[test]
+    fn test_combined_results_suffix() {
+        // Test with "fire+"
+        let query = vec!["fire+".to_string()];
+        let results = find_emojis(&query, 10, &None, &None);
+
+        assert_eq!(results.len(), 1);
+        let (keyword, emoji) = &results[0];
+        assert_eq!(keyword, "fire");
+        // Should contain multiple fire emojis concatenated
+        assert!(emoji.contains("🔥"));
+        assert!(emoji.chars().count() > 1);
+    }
+
+    #[test]
+    fn test_combined_results_separate_arg() {
+        // Test with "fire +"
+        let query = vec!["fire".to_string(), "+".to_string()];
+        let results = find_emojis(&query, 10, &None, &None);
+
+        assert_eq!(results.len(), 1);
+        let (keyword, emoji) = &results[0];
+        assert_eq!(keyword, "fire");
+        assert!(emoji.contains("🔥"));
+        assert!(emoji.chars().count() > 1);
+    }
+
+    #[test]
+    fn test_combined_results_no_plus() {
+        // Test with "fire" (normal behavior)
+        let query = vec!["fire".to_string()];
+        let results = find_emojis(&query, 10, &None, &None);
+
+        assert!(results.len() > 1); // Should return multiple individual results
+    }
+
+    #[test]
+    fn test_combined_results_empty_plus() {
+        // Test with "+"
+        let query = vec!["+".to_string()];
+        let results = find_emojis(&query, 10, &None, &None);
+
+        assert!(results.is_empty());
     }
 }
