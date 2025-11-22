@@ -51,7 +51,9 @@ An Alfred workflow is included for quick emoji searching directly from Alfred! S
 2. Double-click `Almoji-Workflow.alfredworkflow` to install
 3. Type `;` in Alfred followed by your search term
 
-The workflow includes a custom icon and supports skin tone/gender configuration.
+3. Type `;` in Alfred followed by your search term
+
+The workflow includes a custom icon and supports skin tone/gender configuration. You can also set a global hotkey to launch it directly (see [ALFRED_WORKFLOW.md](ALFRED_WORKFLOW.md) for details).
 
 ## Usage
 

@@ -89,6 +89,15 @@ In `info.plist`, find `--limit 20` in the script and change to your desired numb
 
 Use the Alfred workflow configuration UI, or edit the script in `info.plist` to hard-code values.
 
+### Setting a Hotkey
+
+To launch Almoji directly with a keystroke:
+
+1. Open Alfred Preferences → Workflows → Almoji
+2. Double-click the "Hotkey" trigger
+3. Set your desired key combination
+4. **Note**: You must set this manually after importing, as Alfred removes hotkeys from imported workflows for security.
+
 ## Technical Details
 
 The workflow uses:

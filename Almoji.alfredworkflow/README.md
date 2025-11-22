@@ -125,6 +125,16 @@ By default, the workflow shows up to 20 results. To change this:
 3. Double-click the Script Filter object
 4. In the script, modify the `--limit 20` value
 
+### Setting a Hotkey
+
+To launch Almoji directly with a keystroke (bypassing the `;` keyword):
+
+1. Open Alfred Preferences
+2. Go to Workflows → Almoji
+3. Double-click the "Hotkey" trigger object (if present) or add a new "Triggers → Hotkey" object
+4. Click the "Hotkey" field and press your desired key combination (e.g., `Cmd + Ctrl + E`)
+5. **Note**: Alfred strips hotkeys when importing workflows, so you **must** set this manually.
+
 ## Troubleshooting
 
 ### "Almoji not found" error message
