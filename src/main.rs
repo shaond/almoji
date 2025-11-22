@@ -1258,9 +1258,9 @@ fn main() {
                         uid: actual_keyword.to_string(),
                         title: raw_emoji.to_string(),
                         subtitle: actual_keyword.to_string(),
-                        arg: raw_emoji.to_string(),
+                        arg: format!("{} ", raw_emoji),
                         text: AlfredItemText {
-                            copy: raw_emoji.to_string(),
+                            copy: format!("{} ", raw_emoji),
                             largetype: raw_emoji.to_string(),
                         },
                         valid: true,
@@ -1270,9 +1270,9 @@ fn main() {
                         uid: keyword.clone(),
                         title: emoji.clone(),
                         subtitle: keyword,
-                        arg: emoji.clone(),
+                        arg: format!("{} ", emoji),
                         text: AlfredItemText {
-                            copy: emoji.clone(),
+                            copy: format!("{} ", emoji),
                             largetype: emoji,
                         },
                         valid: true,
