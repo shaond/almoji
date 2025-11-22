@@ -9,7 +9,8 @@ I built this to be used with [Alfred on macOS](https://alfred.app/). I include a
 - **Extremely Fast**: Uses compile-time perfect hash maps (PHF) for O(1) emoji lookups
 - **No External Dependencies**: Emojis are stored as Unicode characters in the binary itself
 - **System Font Integration**: Emojis render using macOS's native Apple Color Emoji font
-- **Smart Search**: Supports exact matches, prefix matching, and substring matching
+- **Smart Search**: Prioritizes exact slang matches, then standard emojis, followed by prefix and substring matches
+- **Combined Results**: End your search with `+` to get all matching emojis concatenated (e.g., `fire+` -> 🔥❤️‍🔥...)
 - **Customizable**: Support for skin tone modifiers and gender variants
 - **Multi-word Search**: Search for emojis using multiple keywords
 - **Alfred Integration**: Included Alfred workflow for quick emoji access
@@ -70,6 +71,10 @@ almoji --limit 3 sun
 # Output: ☀️ (sun)
 #        😎 (sunglasses)
 #        🌻 (sunflower)
+
+# Combined results (end with +)
+almoji fire+
+# Output: 🔥❤️‍🔥🧑‍🚒👨‍🚒👩‍🚒🚒🎆🧨🧯 (fire)
 ```
 
 ### Command Line Options
@@ -158,9 +163,12 @@ almoji light     # 💡
 2. **Static Data**: All emoji mappings are embedded directly in the binary, eliminating file I/O and external dependencies
 
 3. **Smart Search Algorithm**:
-   - First, tries exact keyword match
-   - Then, performs prefix matching (e.g., "fir" matches "fire")
-   - Finally, performs substring matching for broader results
+   - **Priority 1**: Exact Slang matches (e.g., "fire" -> 🔥)
+   - **Priority 2**: Exact Standard emoji matches (e.g., "cat" -> 🐱)
+   - **Priority 3**: Prefix Slang matches (e.g., "fac" -> "facepalm" 🤦)
+   - **Priority 4**: Prefix Standard emoji matches (e.g., "fac" -> "factory" 🏭)
+   - **Priority 5**: Substring Slang matches
+   - **Priority 6**: Substring Standard emoji matches
 
 4. **Zero-copy**: Uses static string references throughout, avoiding heap allocations
 

@@ -5,6 +5,7 @@ A blazingly fast emoji search workflow for Alfred using the Almoji CLI.
 ## Features
 
 - **Fast Emoji Search**: Search through 500+ emojis using keywords
+- **Combined Results**: End your search with `+` to get all matching emojis concatenated (e.g., `; fire+` -> 🔥❤️‍🔥...)
 - **Customizable**: Set default skin tone and gender variants
 - **Simple Interface**: Just type `;` followed by your search term
 - **Copy to Clipboard**: Press Enter to copy the selected emoji
@@ -67,6 +68,7 @@ cp -r Almoji.alfredworkflow ~/Library/Application\ Support/Alfred/Alfred.alfredp
 ; happy       → 😊 😀 😂 (happy, smile, laugh)
 ; dog         → 🐕 🐶 (dog, puppy)
 ; pizza       → 🍕 (pizza)
+; fire+       → 🔥❤️‍🔥🧑‍🚒👨‍🚒👩‍🚒🚒🎆🧨🧯 (fire)
 ```
 
 ## Configuration
