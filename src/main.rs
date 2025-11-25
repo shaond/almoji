@@ -415,6 +415,9 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
     map.insert("goon", vec!["🍷"]);
     map.insert("croc", vec!["🐊"]);
     map.insert("tropical", vec!["🌴"]);
+    map.insert("chips", vec!["🍟"]);
+    map.insert("cops", vec!["👮", "👮‍♀️", "👮‍♂️", "🚔", "🚓", "🚨"]);
+    map.insert("mate", vec!["🤝"]);
 
     // Canadian English slang
     map.insert("eh", vec!["🇨🇦", "🤔"]);
