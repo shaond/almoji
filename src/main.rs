@@ -996,9 +996,29 @@ static SLANG_MAP: Lazy<HashMap<&'static str, Vec<&'static str>>> = Lazy::new(|| 
     map
 });
 
+/// Normalize strings for relaxed matching (lowercase, remove common separators)
+fn normalize_relaxed(s: &str) -> String {
+    s.to_lowercase()
+        .replace([' ', '_', '-', ':'], "")
+}
+
+/// Check containment with relaxed normalization to catch close substring matches
+fn relaxed_contains(haystack: &str, needle: &str) -> bool {
+    if haystack.contains(needle) {
+        return true;
+    }
+
+    let hay_norm = normalize_relaxed(haystack);
+    let needle_norm = normalize_relaxed(needle);
+
+    hay_norm.contains(&needle_norm) || needle_norm.contains(&hay_norm)
+}
+
 /// Search for emojis matching the query using the comprehensive Unicode emoji database
 fn search_emojis(query: &str, limit: usize) -> Vec<(String, &'static emojis::Emoji)> {
     let query_lower = query.to_lowercase();
+    let query_relaxed = normalize_relaxed(&query_lower);
+    let allow_substring = query_relaxed.chars().count() > 2;
     let mut results = Vec::new();
     let mut seen: HashMap<String, bool> = HashMap::new();
 
@@ -1173,7 +1193,7 @@ fn search_emojis(query: &str, limit: usize) -> Vec<(String, &'static emojis::Emo
     }
 
     // 5. Check custom slang mappings - substring match
-    if results.len() < limit {
+    if allow_substring && results.len() < limit {
         for (slang_term, slang_emojis) in SLANG_MAP.iter() {
             // Skip exact and prefix matches (already handled)
             if *slang_term == query_lower.as_str() || slang_term.starts_with(&query_lower) {
@@ -1181,7 +1201,7 @@ fn search_emojis(query: &str, limit: usize) -> Vec<(String, &'static emojis::Emo
             }
 
             // Check if slang term contains query
-            if slang_term.contains(&query_lower) {
+            if relaxed_contains(slang_term, &query_lower) {
                 for emoji_str in slang_emojis {
                     if results.len() >= limit {
                         break;
@@ -1225,7 +1245,7 @@ fn search_emojis(query: &str, limit: usize) -> Vec<(String, &'static emojis::Emo
     }
 
     // 6. Substring matches on standard emoji names
-    if results.len() < limit {
+    if allow_substring && results.len() < limit {
         for emoji in emojis::iter() {
             if results.len() >= limit {
                 break;
@@ -1239,7 +1259,7 @@ fn search_emojis(query: &str, limit: usize) -> Vec<(String, &'static emojis::Emo
             let name_normalized = emoji.name().to_lowercase();
 
             // Check if name contains query
-            if name_normalized.contains(&query_lower) {
+            if relaxed_contains(&name_normalized, &query_lower) {
                 results.push((name_normalized.replace(' ', ""), emoji));
                 seen.insert(key.clone(), true);
                 continue;
@@ -1248,7 +1268,7 @@ fn search_emojis(query: &str, limit: usize) -> Vec<(String, &'static emojis::Emo
             // Check shortcodes for substring matches
             for shortcode in emoji.shortcodes() {
                 let sc = shortcode.trim_matches(':').to_lowercase();
-                if sc.contains(&query_lower) {
+                if relaxed_contains(&sc, &query_lower) {
                     results.push((sc, emoji));
                     seen.insert(key.clone(), true);
                     break;
@@ -1548,6 +1568,27 @@ mod tests {
         let query = vec!["+".to_string()];
         let results = find_emojis(&query, 10, &None, &None);
 
+        assert!(results.is_empty());
+    }
+
+    #[test]
+    fn test_relaxed_substring_matches_slang() {
+        let results = search_emojis("factor", 10);
+        assert!(results.iter().any(|(keyword, _)| keyword == "refactor"));
+    }
+
+    #[test]
+    fn test_relaxed_substring_matches_standard_name() {
+        let results = search_emojis("factor", 10);
+        assert!(results
+            .iter()
+            .any(|(_, emoji)| emoji.name().to_lowercase() == "factory"));
+    }
+
+    #[test]
+    fn test_no_relaxed_substring_for_two_char_queries() {
+        // Should not match via relaxed substring when the query is only 2 chars
+        let results = search_emojis("ct", 10);
         assert!(results.is_empty());
     }
 }
